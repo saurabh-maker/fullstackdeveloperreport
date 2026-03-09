@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Talent Intelligence · Full-Stack Developer Hiring 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --my:#0284c7;--pt:#d97706;--bel:#7c3aed;
+  --my-l:#e0f2fe;--pt-l:#fef3c7;--bel-l:#ede9fe;
+  --my-b:#bae6fd;--pt-b:#fde68a;--bel-b:#ddd6fe;
+  --bg:#f1f5f9;--white:#fff;--border:#e2e8f0;
+  --text:#0f172a;--sub:#64748b;--muted:#94a3b8;
+  --green:#059669;--green-l:#d1fae5;--green-b:#6ee7b7;
+  --red:#dc2626;--red-l:#fee2e2;
+  --amber:#d97706;--amber-l:#fef3c7;
+  --sh:0 1px 3px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.55}
+
+.hdr{background:var(--white);border-bottom:1px solid var(--border);padding:14px 28px;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hdr-l{display:flex;align-items:center;gap:12px}
+.hdr-bar{width:5px;height:40px;background:linear-gradient(180deg,#0284c7,#d97706,#7c3aed);border-radius:3px;flex-shrink:0}
+.hdr-title{font-size:18px;font-weight:900;letter-spacing:-.03em}
+.hdr-sub{font-size:10px;color:var(--sub);margin-top:2px}
+.hdr-kpis{display:flex;gap:8px;flex-wrap:wrap}
+.kchip{border-radius:9px;padding:7px 13px;text-align:center;border:1.5px solid}
+.kchip .kv{font-size:17px;font-weight:900;font-family:monospace;line-height:1}
+.kchip .kl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--sub);margin-top:2px}
+.kc-my{border-color:var(--my);background:var(--my-l)}.kc-my .kv{color:var(--my)}
+.kc-pt{border-color:var(--pt);background:var(--pt-l)}.kc-pt .kv{color:var(--pt)}
+.kc-bel{border-color:var(--bel);background:var(--bel-l)}.kc-bel .kv{color:var(--bel)}
+
+.tabs{background:var(--white);border-bottom:2px solid var(--border);padding:0 28px;display:flex;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tb{background:transparent;border:none;border-bottom:3px solid transparent;padding:13px 16px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--sub);cursor:pointer;white-space:nowrap;transition:all .2s;margin-bottom:-2px}
+.tb:hover{color:var(--text)}.tb.act{color:var(--my);border-bottom-color:var(--my);font-weight:700}
+
+.wrap{padding:22px 28px;max-width:1400px;margin:0 auto}
+.pane{display:none;animation:fu .22s ease}.pane.act{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g21{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+.g12{display:grid;grid-template-columns:1fr 1.6fr;gap:14px}
+.mb14{margin-bottom:14px}.mb20{margin-bottom:20px}
+
+.card{background:var(--white);border:1px solid var(--border);border-radius:13px;padding:20px 22px;box-shadow:var(--sh)}
+.ct{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:3px}
+.cs{font-size:9.5px;color:var(--sub);margin-bottom:14px}
+
+/* Country summary cards */
+.cc{background:var(--white);border-radius:14px;padding:18px;box-shadow:var(--sh);border:1px solid var(--border);border-top:4px solid}
+.cc.my{border-top-color:var(--my)}.cc.pt{border-top-color:var(--pt)}.cc.bel{border-top-color:var(--bel)}
+.cc-top{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.flag{font-size:22px}.cc-name{font-size:15px;font-weight:800}
+.vbadge{font-size:8px;font-weight:800;text-transform:uppercase;padding:2px 8px;border-radius:99px;letter-spacing:.07em}
+.vb-my{background:var(--my-l);color:var(--my)}.vb-pt{background:var(--pt-l);color:#92400e}.vb-bel{background:var(--bel-l);color:var(--bel)}
+.bsc{font-size:28px;font-weight:900;font-family:monospace}
+.sc-my{color:var(--my)}.sc-pt{color:var(--pt)}.sc-bel{color:var(--bel)}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.mi{background:var(--bg);border-radius:9px;padding:8px 10px}
+.ml{font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--sub);font-weight:700}
+.mv{font-size:12px;font-weight:700;margin-top:2px}
+.mv.my{color:var(--my)}.mv.pt{color:var(--pt)}.mv.bel{color:var(--bel)}
+
+/* Info boxes */
+.ebox{border-left:4px solid;border-radius:9px;padding:11px 14px;margin-bottom:14px}
+.ebox-t{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;margin-bottom:3px}
+.ebox p{font-size:11px;line-height:1.6}
+.ebox.green{background:#f0fdf4;border-color:var(--green)}.ebox.green .ebox-t{color:var(--green)}.ebox.green p{color:#14532d}
+.ebox.blue{background:#eff6ff;border-color:var(--my)}.ebox.blue .ebox-t{color:var(--my)}.ebox.blue p{color:#1e40af}
+.ebox.amber{background:var(--amber-l);border-color:var(--pt)}.ebox.amber .ebox-t{color:#92400e}.ebox.amber p{color:#78350f}
+.ebox.red{background:var(--red-l);border-color:var(--red)}.ebox.red .ebox-t{color:var(--red)}.ebox.red p{color:#7f1d1d}
+.ebox.violet{background:var(--bel-l);border-color:var(--bel)}.ebox.violet .ebox-t{color:var(--bel)}.ebox.violet p{color:#4c1d95}
+.ebox.grey{background:#f8fafc;border-color:#cbd5e1}.ebox.grey .ebox-t{color:#475569}.ebox.grey p{color:#334155}
+
+/* Progress bars */
+.pr{margin-bottom:10px}
+.pr-lbl{display:flex;justify-content:space-between;margin-bottom:3px}
+.pr-lbl span:first-child{font-size:11px;color:var(--sub)}
+.pr-lbl span:last-child{font-size:11px;font-weight:700;font-family:monospace}
+.pr-trk{background:var(--border);border-radius:99px;height:7px}
+.pr-fill{height:100%;border-radius:99px}
+
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:#f8fafc;color:var(--sub);font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:8px 10px;text-align:left;border-bottom:2px solid var(--border);font-size:9.5px}
+.tbl td{padding:8px 10px;border-bottom:1px solid var(--border)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#f8fafc}
+.num{font-family:monospace;font-weight:700}
+.tmy{color:var(--my);font-weight:700}.tpt{color:var(--pt);font-weight:700}.tbel{color:var(--bel);font-weight:700}
+
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font-size:10px;font-weight:700}
+.pg{background:var(--green-l);color:#065f46}.pa{background:var(--amber-l);color:#92400e}
+.pr2{background:var(--red-l);color:#991b1b}.pb{background:var(--my-l);color:#075985}
+
+.sdiv{display:flex;align-items:center;gap:10px;margin:20px 0 14px}
+.sdiv span{font-size:10px;font-weight:800;color:var(--sub);white-space:nowrap;text-transform:uppercase;letter-spacing:.09em}
+.sdiv::before,.sdiv::after{content:"";flex:1;height:1px;background:var(--border)}
+
+.sr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.sr:last-child{border-bottom:none}
+.sl{font-size:11px;color:var(--sub)}.sv{font-size:11px;font-weight:700}
+
+.tgrp{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tbtn{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;font-family:'Outfit',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--sub);transition:all .15s}
+.tbtn.a-my{background:var(--my);border-color:var(--my);color:#fff}
+.tbtn.a-pt{background:var(--pt);border-color:var(--pt);color:#fff}
+.tbtn.a-bel{background:var(--bel);border-color:var(--bel);color:#fff}
+
+/* TAM CLARITY BOXES */
+.tam-box{border-radius:11px;padding:14px 16px;border:1.5px solid;margin-bottom:12px}
+.tam-box .tam-t{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.tam-box .tam-inc{font-size:11px;line-height:1.7;color:#14532d}
+.tam-box .tam-exc{font-size:11px;line-height:1.7;color:#991b1b}
+.tam-box.my{background:var(--my-l);border-color:var(--my-b)}.tam-box.my .tam-t{color:var(--my)}
+.tam-box.pt{background:var(--pt-l);border-color:var(--pt-b)}.tam-box.pt .tam-t{color:var(--pt)}
+.tam-box.bel{background:var(--bel-l);border-color:var(--bel-b)}.tam-box.bel .tam-t{color:var(--bel)}
+
+/* MAP */
+.map-outer{position:relative;background:linear-gradient(180deg,#1e3a5f 0%,#1e4976 40%,#163d68 100%);border-radius:14px;overflow:hidden;border:2px solid #1e3a5f;box-shadow:0 4px 24px rgba(0,0,0,.18)}
+.world-svg{width:100%;height:460px;display:block}
+.land{fill:#2d5a3d;stroke:#3d7a52;stroke-width:.5}
+.land-hi{fill:#1a4a8a;stroke:#2563ab;stroke-width:.5}
+.ocean{fill:#0f2d4a}
+
+/* Map rings pulse */
+@keyframes ring{0%,100%{opacity:.7}50%{opacity:.3}}
+.ring{animation:ring 2.5s ease-in-out infinite}
+
+/* Map tooltip */
+.map-tt{position:absolute;background:rgba(5,15,30,.96);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:16px 18px;box-shadow:0 12px 40px rgba(0,0,0,.5);pointer-events:none;opacity:0;transition:opacity .18s;z-index:100;min-width:260px;max-width:300px;backdrop-filter:blur(8px)}
+.map-tt.show{opacity:1}
+.tt-hdr{font-size:14px;font-weight:800;color:#fff;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid rgba(255,255,255,.12)}
+.tt-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:11px}
+.tt-lbl{color:rgba(255,255,255,.55)}.tt-val{font-weight:700;color:#fff}
+.tt-badge{display:block;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:800;margin-top:9px;text-align:center}
+
+/* Map legend */
+.map-leg{position:absolute;bottom:14px;left:14px;background:rgba(5,15,30,.85);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;backdrop-filter:blur(6px)}
+.map-leg p{font-size:8.5px;color:rgba(255,255,255,.4);margin-top:6px}
+
+/* Source tags */
+.src{font-size:9px;color:var(--muted);font-style:italic;margin-top:8px}
+.src a{color:var(--my);text-decoration:none}
+
+/* Strat section */
+.strat{border:1px solid var(--border);border-radius:13px;background:var(--white);margin-bottom:14px;overflow:hidden;box-shadow:var(--sh)}
+.strat-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:#f8fafc}
+.strat-num{width:27px;height:27px;border-radius:50%;background:var(--my);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.strat-title{font-size:13.5px;font-weight:800}
+.strat-body{padding:18px 22px}
+.strat-body p{font-size:11.5px;color:#475569;line-height:1.78;margin-bottom:10px}
+.strat-body p:last-child{margin-bottom:0}
+.strat-body strong{color:var(--text);font-weight:700}
+.fgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+.fbox{border-radius:10px;padding:14px 15px;border:1px solid}
+.fbox .fl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.fbox .fv{font-size:14px;font-weight:800;margin-bottom:3px}
+.fbox .fd{font-size:10.5px;line-height:1.55}
+.fbox.my{background:var(--my-l);border-color:var(--my-b)}.fbox.my .fl,.fbox.my .fv{color:var(--my)}.fbox.my .fd{color:#0c4a6e}
+.fbox.pt{background:var(--pt-l);border-color:var(--pt-b)}.fbox.pt .fl,.fbox.pt .fv{color:var(--pt)}.fbox.pt .fd{color:#78350f}
+.fbox.bel{background:var(--bel-l);border-color:var(--bel-b)}.fbox.bel .fl,.fbox.bel .fv{color:var(--bel)}.fbox.bel .fd{color:#4c1d95}
+
+.icard{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 15px;margin-bottom:9px}
+.icard .ic-n{font-size:9px;font-weight:800;color:var(--my);text-transform:uppercase;letter-spacing:.08em}
+.icard .ic-t{font-size:12.5px;font-weight:700;margin:3px 0}
+.icard .ic-b{font-size:11px;color:var(--sub);line-height:1.65}
+
+.rec{border-radius:11px;padding:16px;border:1.5px solid;margin-bottom:10px}
+.rec.prim{background:var(--my-l);border-color:var(--my)}.rec.prim .rt{color:var(--my)}
+.rec.sec{background:var(--pt-l);border-color:var(--pt)}.rec.sec .rt{color:var(--pt)}
+.rec.lim{background:var(--bel-l);border-color:var(--bel)}.rec.lim .rt{color:var(--bel)}
+.rt{font-size:12.5px;font-weight:800;margin-bottom:7px}
+.rb{font-size:11.5px;line-height:1.75}
+.rb.my{color:#0c4a6e}.rb.pt{color:#78350f}.rb.bel{color:#4c1d95}
+
+/* Bar fill for FT/contract */
+.bfill-wrap{position:relative;height:14px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:7px}
+.bfill-a{position:absolute;left:0;top:0;height:100%;border-radius:99px 0 0 99px}
+.bfill-b{position:absolute;top:0;height:100%;border-radius:0 99px 99px 0}
+
+.ttf-big{font-size:36px;font-weight:900;font-family:monospace;text-align:center;padding:10px 0}
+
+.mtx{width:100%;border-collapse:collapse;font-size:11px}
+.mtx th{background:#f8fafc;color:var(--sub);font-weight:700;padding:9px 10px;border-bottom:2px solid var(--border);text-align:center;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}
+.mtx th:first-child{text-align:left}
+.mtx td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:center}
+.mtx td:first-child{text-align:left;font-weight:600}
+.mtx tr:hover td{background:#f8fafc}
+.ms{color:#166534;font-weight:700}.mm{color:#92400e;font-weight:700}.mw{color:#991b1b;font-weight:700}
+
+.ftr{background:var(--white);border-top:1px solid var(--border);padding:12px 28px;margin-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ftr p{font-size:9.5px;color:var(--muted);line-height:1.5}
+
+@media(max-width:900px){.g3,.g2,.g21,.g12,.fgrid{grid-template-columns:1fr}.wrap,.hdr,.tabs{padding-left:14px;padding-right:14px}.hdr-kpis{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ──── HEADER ──── -->
+<div class="hdr">
+  <div class="hdr-in">
+    <div class="hdr-l">
+      <div class="hdr-bar"></div>
+      <div>
+        <div class="hdr-title">Talent Intelligence · Full-Stack Developer Hiring</div>
+        <div class="hdr-sub">🇲🇾 Malaysia · 🇵🇹 Portugal · 🇬🇧 Belfast &nbsp;|&nbsp; LinkedIn Talent Insights · Live market data · Salary sources: SalaryExpert, JobStreet, Indeed, Randstad 2026</div>
+      </div>
+    </div>
+    <div class="hdr-kpis">
+      <div class="kchip kc-my"><div class="kv">3,900</div><div class="kl">🇲🇾 MY TAM</div></div>
+      <div class="kchip kc-pt"><div class="kv">3,600</div><div class="kl">🇵🇹 Portugal Pool</div></div>
+      <div class="kchip kc-bel"><div class="kv">187</div><div class="kl">🇬🇧 BEL TAM</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ──── TABS ──── -->
+<div class="tabs">
+  <button class="tb act" onclick="sw('overview',this)">📊 Overview</button>
+  <button class="tb" onclick="sw('ecosystem',this)">🌍 Company Ecosystem Map</button>
+  <button class="tb" onclick="sw('pulse',this)">⚡ Market Pulse</button>
+  <button class="tb" onclick="sw('strategy',this)">🧠 Strategic Analysis</button>
+  <button class="tb" onclick="sw('tam',this)">📈 TAM Breakdown</button>
+  <button class="tb" onclick="sw('profile',this)">👤 Talent Profile</button>
+  <button class="tb" onclick="sw('comp',this)">💰 Compensation 2026</button>
+  <button class="tb" onclick="sw('legal',this)">📋 Contract & Legal</button>
+  <button class="tb" onclick="sw('score',this)">🎯 Scorecard</button>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════════════════════════════
+     OVERVIEW
+══════════════════════════════════════════════════════ -->
+<div id="pane-overview" class="pane act">
+  <div class="ebox blue mb20">
+    <div class="ebox-t">📌 Data Sources & Transparency</div>
+    <p><strong>TAM figures:</strong> LinkedIn Talent Insights (LTI) — English-speaking Full-Stack Developers, 1–10 yrs exp. <strong>Telecom/OSS TAM:</strong> subset of above filtered for OSS/BSS/Network Inventory/Telecom background (LTI). <strong>Salary:</strong> SalaryExpert 2026, Indeed Feb 2026, JobStreet Jan 2026, Randstad 2026 Salary Guide, Glassdoor March 2026. <strong>Live jobs:</strong> Glassdoor/LinkedIn/NIJobs March 2026 live counts. <strong>FT/contract split:</strong> ITJobsWatch (Belfast), OECD Employment Outlook 2025 ICT sector. All figures March 2026 unless noted.</p>
+  </div>
+
+  <div class="g3 mb20">
+    <!-- MALAYSIA -->
+    <div class="cc my">
+      <div class="cc-top">
+        <span class="flag">🇲🇾</span>
+        <div><div class="cc-name">Malaysia</div><span class="vbadge vb-my">Primary Hub — Scale</span></div>
+        <div style="margin-left:auto;text-align:right"><div class="bsc sc-my">8.8</div><div style="font-size:9px;color:var(--sub)">/ 10</div></div>
+      </div>
+      <!-- TAM CLARITY -->
+      <div style="background:#f0f9ff;border:1px solid var(--my-b);border-radius:9px;padding:10px 12px;margin-bottom:10px">
+        <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--my);margin-bottom:5px">TAM Definition (LTI)</div>
+        <div style="font-size:10.5px;color:#0c4a6e;line-height:1.65">✅ Full-Stack Developers on LinkedIn<br>✅ English speakers · 1–10 yrs experience<br>✅ <strong>Includes</strong> those with Telecom/OSS skills (471)<br>❌ Excludes: &lt;1yr, 10+yr, non-English<br>❌ Excludes: QA, DevOps, pure mobile</div>
+      </div>
+      <div class="mg">
+        <div class="mi"><div class="ml">Full-Stack TAM</div><div class="mv my">3,900</div></div>
+        <div class="mi"><div class="ml">Telecom/OSS Subset</div><div class="mv my">471</div></div>
+        <div class="mi"><div class="ml">Live FT Jobs*</div><div class="mv my">500+</div></div>
+        <div class="mi"><div class="ml">Contract Jobs*</div><div class="mv">~22%</div></div>
+        <div class="mi"><div class="ml">TTF (sourcing→offer)</div><div class="mv">45–55d</div></div>
+        <div class="mi"><div class="ml">Employer Burden</div><div class="mv">+13.2%</div></div>
+      </div>
+      <div class="ebox green" style="margin:12px 0 0"><div class="ebox-t">Verdict</div><p>Largest pool. Most telecom depth. Lowest cost. Fastest hiring. Only market that scales to 20+ hires/yr.</p></div>
+      <div class="src">*LinkedIn + JobStreet Mar 2026. 38k+ monthly IT searches on JobStreet MY.</div>
+    </div>
+
+    <!-- PORTUGAL -->
+    <div class="cc pt">
+      <div class="cc-top">
+        <span class="flag">🇵🇹</span>
+        <div><div class="cc-name">Portugal</div><span class="vbadge vb-pt">EMEA Quality Hub</span></div>
+        <div style="margin-left:auto;text-align:right"><div class="bsc sc-pt">8.1</div><div style="font-size:9px;color:var(--sub)">/ 10</div></div>
+      </div>
+      <div style="background:#fffbeb;border:1px solid var(--pt-b);border-radius:9px;padding:10px 12px;margin-bottom:10px">
+        <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--pt);margin-bottom:5px">TAM Definition (LTI)</div>
+        <div style="font-size:10.5px;color:#78350f;line-height:1.65">✅ Full-Stack Developers on LinkedIn · English · 1–10 years<br>✅ <strong>3,600</strong> = general search (no domain filter)<br>✅ <strong>270</strong> = same search + Telecom/OSS/Inventory filter → Blue Planet target pool<br>❌ Not counted: non-English, less than 1 year, more than 10 years, QA-only, DevOps-only</div>
+      </div>
+      <div class="mg">
+        <div class="mi"><div class="ml">Full-Stack Pool (general)</div><div class="mv pt">3,600</div></div>
+        <div class="mi"><div class="ml">With OSS/Inventory Skills</div><div class="mv" style="color:#d97706;font-weight:800;font-size:13px">270</div></div>
+        <div class="mi"><div class="ml">Live FT Jobs*</div><div class="mv pt">209+</div></div>
+        
+        <div class="mi"><div class="ml">TTF (sourcing→offer)</div><div class="mv">60–80d</div></div>
+        <div class="mi"><div class="ml">Employer Burden</div><div class="mv">+23.75%</div></div>
+      </div>
+      <div class="ebox amber" style="margin:12px 0 0"><div class="ebox-t">Verdict</div><p>English ranked number 6 in Europe (EF EPI 2025). Best EMEA timezone hub. 270 developers with OSS and Inventory skills — the largest qualifying pool for the Blue Planet role.</p></div>
+      <div class="src">*Glassdoor Portugal Mar 2026: 209 live Full-Stack Developer roles (verified count).</div>
+    </div>
+
+    <!-- BELFAST -->
+    <div class="cc bel">
+      <div class="cc-top">
+        <span class="flag">🇬🇧</span>
+        <div><div class="cc-name">Belfast</div><span class="vbadge vb-bel">UK Niche Only</span></div>
+        <div style="margin-left:auto;text-align:right"><div class="bsc sc-bel">6.9</div><div style="font-size:9px;color:var(--sub)">/ 10</div></div>
+      </div>
+      <div style="background:#f5f3ff;border:1px solid var(--bel-b);border-radius:9px;padding:10px 12px;margin-bottom:10px">
+        <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--bel);margin-bottom:5px">TAM Definition (LTI)</div>
+        <div style="font-size:10.5px;color:#4c1d95;line-height:1.65">✅ Full-Stack Developers on LinkedIn<br>✅ English speakers · 1–10 yrs experience<br>✅ <strong>Includes</strong> those with Telecom/OSS skills (18)<br>❌ Excludes: &lt;1yr, 10+yr, non-English<br>❌ Excludes: QA, DevOps, pure mobile</div>
+      </div>
+      <div class="mg">
+        <div class="mi"><div class="ml">Full-Stack TAM</div><div class="mv bel">187</div></div>
+        <div class="mi"><div class="ml">Telecom/OSS Subset</div><div class="mv bel">18</div></div>
+        <div class="mi"><div class="ml">Live SW Dev Jobs*</div><div class="mv bel">131</div></div>
+        <div class="mi"><div class="ml">Contract Share</div><div class="mv">~37%</div></div>
+        <div class="mi"><div class="ml">TTF (sourcing→offer)</div><div class="mv">35–45d</div></div>
+        <div class="mi"><div class="ml">Employer NIC</div><div class="mv">+15%</div></div>
+      </div>
+      <div class="ebox red" style="margin:12px 0 0"><div class="ebox-t">Verdict</div><p>Only 187 total devs. 18 telecom specialists. Cannot scale. UK-alignment roles only. Max 5/yr.</p></div>
+      <div class="src">*Glassdoor Belfast Mar 2026: 131 software developer jobs (verified live count).</div>
+    </div>
+  </div>
+
+  <div class="g21 mb20">
+    <div class="card">
+      <div class="ct">Total Addressable Market — Full-Stack vs Telecom/OSS Subset</div>
+      <div class="cs">TAM = LinkedIn · English speakers · 1–10yr exp · Telecom/OSS = same filter + OSS/BSS/Telecom background keyword match</div>
+      <div style="position:relative;height:230px"><canvas id="cTam"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Pool Size Comparison</div><div class="cs">Relative scale across all three markets</div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--sub);margin-bottom:8px">Full-Stack TAM (LinkedIn Talent Insights)</div>
+        <div class="pr"><div class="pr-lbl"><span>🇲🇾 Malaysia</span><span style="color:var(--my)">3,900</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--my)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>🇵🇹 Portugal</span><span style="color:var(--pt)">3,600</span></div><div class="pr-trk"><div class="pr-fill" style="width:92%;background:var(--pt)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>🇬🇧 Belfast</span><span style="color:var(--bel)">187</span></div><div class="pr-trk"><div class="pr-fill" style="width:5%;background:var(--bel)"></div></div></div>
+      </div>
+      <div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--sub);margin-bottom:8px">Telecom/OSS TAM Subset (same LinkedIn filter)</div>
+        <div class="pr"><div class="pr-lbl"><span>🇲🇾 Malaysia</span><span style="color:var(--my)">471</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--my)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>🇵🇹 Portugal</span><span style="color:var(--pt)">277</span></div><div class="pr-trk"><div class="pr-fill" style="width:59%;background:var(--pt)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>🇬🇧 Belfast</span><span style="color:var(--bel)">18</span></div><div class="pr-trk"><div class="pr-fill" style="width:4%;background:var(--bel)"></div></div></div>
+      </div>
+      <div class="ebox blue" style="margin-top:12px;margin-bottom:0"><div class="ebox-t">Key ratio</div><p>Malaysia has <strong>21× more developers</strong> than Belfast and <strong>26× more telecom specialists</strong>. Combined MY+PT telecom TAM = <strong>748 engineers</strong>.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ct">🎯 Where to Hire — Decision Guide by Use Case</div><div class="cs">Quick reference for leadership / headcount planning conversations</div>
+    <div class="g3">
+      <div style="background:var(--my-l);border:1px solid var(--my-b);border-radius:11px;padding:15px">
+        <div style="font-weight:800;font-size:13px;color:var(--my);margin-bottom:9px">🇲🇾 Malaysia — Hire Here For Scale</div>
+        <div style="font-size:11.5px;color:#0c4a6e;line-height:1.9">✅ Biggest pool (3,900 devs)<br>✅ Most telecom specialists (471)<br>✅ 500+ live FT openings<br>✅ Lowest cost (+13.2% burden)<br>✅ Fastest start — 4–8 wk notice<br>✅ Full-Stack demand growing 20% yr (Nucamp 2025)<br>⚠️ English good (not #1 ranked)</div>
+      </div>
+      <div style="background:var(--pt-l);border:1px solid var(--pt-b);border-radius:11px;padding:15px">
+        <div style="font-weight:800;font-size:13px;color:var(--pt);margin-bottom:9px">🇵🇹 Portugal — EMEA Senior Quality</div>
+        <div style="font-size:11.5px;color:#78350f;line-height:1.9">✅ English ranked number 6 in Europe (EF EPI 2025)<br>✅ 270 developers with OSS and Inventory skills<br>✅ 57% have 5 or more years of experience<br>✅ 209+ live full-time roles right now (Glassdoor March 2026)<br>✅ Tech jobs growing 25% per year (Nucamp 2025)<br>⚠️ Notice period can be up to 90 days for senior hires<br>⚠️ Highest employer tax at 23.75%</div>
+      </div>
+      <div style="background:var(--bel-l);border:1px solid var(--bel-b);border-radius:11px;padding:15px">
+        <div style="font-weight:800;font-size:13px;color:var(--bel);margin-bottom:9px">🇬🇧 Belfast — UK Niche Presence</div>
+        <div style="font-size:11.5px;color:#4c1d95;line-height:1.9">✅ Native English<br>✅ UK timezone & compliance<br>✅ 131 SW dev jobs live (Glassdoor)<br>✅ Fast process — 35–45 day TTF<br>❌ Only 187 total devs<br>❌ Only 18 telecom specialists<br>❌ Highest salary cost per head</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     COMPANY ECOSYSTEM MAP
+══════════════════════════════════════════════════════ -->
+<div id="pane-ecosystem" class="pane">
+  <div class="ebox blue mb20">
+    <div class="ebox-t">🌍 What this shows</div>
+    <p><strong>Company Ecosystem Map</strong> — proportional circles show Full-Stack Developer talent pool size per location. Hover or click any circle to see <strong>full hiring intelligence</strong>: TAM, live job counts, salary, time-to-fill, notice periods, top companies, and verdict. Data: LinkedIn Talent Insights + live job platform searches March 2026.</p>
+  </div>
+
+  <div style="position:relative" class="mb20">
+    <div class="map-outer">
+      <svg class="world-svg" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" id="worldSvg">
+        <!-- Deep ocean background -->
+        <rect width="1000" height="480" fill="#0f2d4a"/>
+        <!-- Grid lines subtle -->
+        <line x1="0" y1="160" x2="1000" y2="160" stroke="#1a3a5c" stroke-width=".5"/>
+        <line x1="0" y1="240" x2="1000" y2="240" stroke="#1a3a5c" stroke-width=".5"/>
+        <line x1="0" y1="320" x2="1000" y2="320" stroke="#1a3a5c" stroke-width=".5"/>
+        <line x1="250" y1="0" x2="250" y2="480" stroke="#1a3a5c" stroke-width=".5"/>
+        <line x1="500" y1="0" x2="500" y2="480" stroke="#1a3a5c" stroke-width=".5"/>
+        <line x1="750" y1="0" x2="750" y2="480" stroke="#1a3a5c" stroke-width=".5"/>
+
+        <!-- ── LAND MASSES (detailed, green on dark) ── -->
+        <!-- North America -->
+        <path class="land" d="M65,45 L145,40 L175,52 L192,68 L205,95 L210,125 L205,158 L192,172 L178,176 L162,168 L148,178 L140,198 L125,215 L110,220 L95,210 L82,194 L74,172 L70,148 L73,120 L80,92 Z"/>
+        <path class="land" d="M148,178 L165,172 L183,182 L194,202 L200,228 L190,250 L175,260 L160,264 L148,254 L140,237 L138,215 L142,196 Z"/>
+        <!-- Greenland -->
+        <path class="land" d="M185,22 L222,18 L244,28 L248,50 L238,65 L218,70 L196,62 L183,46 Z"/>
+        <!-- Caribbean islands tiny -->
+        <circle class="land" cx="198" cy="225" r="3"/>
+        <circle class="land" cx="205" cy="230" r="2"/>
+        <!-- South America -->
+        <path class="land" d="M185,268 L215,258 L248,268 L265,292 L270,325 L262,362 L248,393 L230,412 L212,422 L196,412 L185,392 L177,360 L175,326 L177,292 Z"/>
+        <!-- Europe -->
+        <path class="land" d="M432,55 L472,48 L502,55 L518,70 L514,88 L498,98 L476,102 L456,96 L440,84 L432,70 Z"/>
+        <path class="land" d="M446,94 L484,90 L506,98 L516,113 L510,130 L492,138 L472,140 L454,132 L444,116 Z"/>
+        <!-- UK -->
+        <path class="land" style="fill:#1a5c30;stroke:#2d8a4e;stroke-width:.8" d="M440,62 L452,58 L460,64 L462,74 L456,82 L445,83 L438,76 Z"/>
+        <!-- Ireland small -->
+        <path class="land" d="M432,68 L440,65 L443,74 L438,80 L432,78 Z"/>
+        <!-- Scandinavia -->
+        <path class="land" d="M462,32 L480,28 L494,38 L496,55 L488,65 L474,68 L460,58 L458,44 Z"/>
+        <path class="land" d="M478,26 L492,22 L504,30 L502,46 L492,52 L480,48 Z"/>
+        <!-- Africa -->
+        <path class="land" d="M440,148 L480,140 L510,150 L526,172 L530,205 L522,242 L508,274 L492,300 L476,316 L460,322 L446,314 L434,294 L427,262 L424,230 L426,198 L432,170 Z"/>
+        <!-- Madagascar -->
+        <ellipse class="land" cx="512" cy="278" rx="8" ry="16" transform="rotate(-15,512,278)"/>
+        <!-- Middle East -->
+        <path class="land" d="M535,115 L570,108 L600,115 L616,130 L610,150 L596,160 L570,160 L548,153 L534,137 Z"/>
+        <!-- India -->
+        <path class="land" d="M610,118 L654,110 L688,118 L708,136 L710,160 L700,182 L678,195 L654,198 L630,186 L614,168 L606,147 Z"/>
+        <!-- Sri Lanka tiny -->
+        <ellipse class="land" cx="682" cy="200" rx="5" ry="8"/>
+        <!-- Russia/Central Asia -->
+        <path class="land" d="M518,28 L640,22 L745,28 L798,42 L820,62 L816,88 L790,106 L748,112 L698,108 L648,104 L605,99 L568,94 L542,82 L525,65 L518,46 Z"/>
+        <!-- China/East Asia -->
+        <path class="land" d="M695,78 L760,68 L810,72 L835,88 L832,110 L808,126 L766,132 L722,126 L698,112 Z"/>
+        <!-- Japan -->
+        <path class="land" d="M808,72 L820,68 L832,76 L830,88 L818,94 L806,88 Z"/>
+        <path class="land" d="M822,66 L832,62 L840,70 L836,80 L826,82 Z"/>
+        <!-- Korea small -->
+        <path class="land" d="M790,86 L802,82 L808,90 L804,100 L792,102 Z"/>
+        <!-- Southeast Asia / Malaysia (highlighted) -->
+        <path class="land" style="fill:#1a5c50;stroke:#2d9a84;stroke-width:.8" d="M718,155 L758,148 L782,156 L796,172 L792,188 L774,197 L750,197 L726,188 L714,174 Z"/>
+        <path class="land" style="fill:#1a5c50;stroke:#2d9a84;stroke-width:.8" d="M758,175 L782,170 L798,180 L800,196 L788,206 L766,207 L748,198 Z"/>
+        <!-- Borneo -->
+        <path class="land" style="fill:#1a5c50;stroke:#2d9a84;stroke-width:.6" d="M762,188 L796,180 L818,190 L820,210 L808,226 L784,228 L762,218 L752,204 Z"/>
+        <!-- Philippines -->
+        <path class="land" d="M800,140 L812,132 L822,140 L820,154 L808,160 L800,152 Z"/>
+        <path class="land" d="M810,155 L820,150 L826,158 L822,168 L812,170 Z"/>
+        <!-- Indonesia -->
+        <path class="land" d="M730,210 L764,204 L790,212 L792,224 L776,230 L748,228 Z"/>
+        <path class="land" d="M792,212 L820,208 L838,218 L834,230 L812,232 Z"/>
+        <!-- Australia -->
+        <path class="land" d="M748,284 L810,272 L850,280 L876,296 L882,322 L870,350 L846,366 L812,372 L778,360 L754,340 L740,316 L738,296 Z"/>
+        <!-- New Zealand -->
+        <path class="land" d="M882,350 L892,340 L900,350 L896,364 L884,368 Z"/>
+        <!-- Atlantic islands -->
+        <ellipse class="land" cx="402" cy="142" rx="4" ry="6"/>
+
+        <!-- ── TALENT LOCATION CIRCLES ── -->
+        <!-- Malaysia: KL approx x=754, y=180 -->
+        <g class="map-dot" onmouseenter="showTT(event,'my')" onmouseleave="hideTT()" onclick="showTT(event,'my')" style="cursor:pointer">
+          <!-- Pulse rings -->
+          <circle cx="754" cy="180" r="70" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity=".25" class="ring"/>
+          <circle cx="754" cy="180" r="52" fill="none" stroke="#38bdf8" stroke-width="2" opacity=".4" class="ring" style="animation-delay:.5s"/>
+          <circle cx="754" cy="180" r="34" fill="#0284c7" fill-opacity=".2" stroke="#38bdf8" stroke-width="2.5"/>
+          <circle cx="754" cy="180" r="22" fill="#0284c7" fill-opacity=".9"/>
+          <text x="754" y="184" text-anchor="middle" fill="#fff" font-size="8.5" font-family="Outfit,sans-serif" font-weight="800">3,900</text>
+          <!-- Label pill -->
+          <rect x="778" y="152" width="110" height="20" rx="5" fill="#0284c7" fill-opacity=".95"/>
+          <text x="833" y="165" text-anchor="middle" fill="#fff" font-size="9.5" font-family="Outfit,sans-serif" font-weight="700">🇲🇾 Malaysia · 3,900</text>
+        </g>
+
+        <!-- Portugal: Lisbon approx x=444, y=103 -->
+        <g class="map-dot" onmouseenter="showTT(event,'pt')" onmouseleave="hideTT()" onclick="showTT(event,'pt')" style="cursor:pointer">
+          <circle cx="444" cy="104" r="44" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity=".25" class="ring" style="animation-delay:.8s"/>
+          <circle cx="444" cy="104" r="30" fill="none" stroke="#fbbf24" stroke-width="2" opacity=".4" class="ring" style="animation-delay:1.3s"/>
+          <circle cx="444" cy="104" r="19" fill="#d97706" fill-opacity=".2" stroke="#fbbf24" stroke-width="2"/>
+          <circle cx="444" cy="104" r="13" fill="#d97706" fill-opacity=".9"/>
+          <text x="444" y="108" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Outfit,sans-serif" font-weight="800">3,600</text>
+          <rect x="460" y="87" width="110" height="20" rx="5" fill="#d97706" fill-opacity=".95"/>
+          <text x="515" y="100" text-anchor="middle" fill="#fff" font-size="9.5" font-family="Outfit,sans-serif" font-weight="700">🇵🇹 Portugal · 3,600</text>
+        </g>
+
+        <!-- Belfast: approx x=444, y=70 -->
+        <g class="map-dot" onmouseenter="showTT(event,'bel')" onmouseleave="hideTT()" onclick="showTT(event,'bel')" style="cursor:pointer">
+          <circle cx="445" cy="71" r="18" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity=".3" class="ring" style="animation-delay:1.2s"/>
+          <circle cx="445" cy="71" r="12" fill="#7c3aed" fill-opacity=".2" stroke="#a78bfa" stroke-width="2"/>
+          <circle cx="445" cy="71" r="8" fill="#7c3aed" fill-opacity=".9"/>
+          <text x="445" y="75" text-anchor="middle" fill="#fff" font-size="6" font-family="Outfit,sans-serif" font-weight="800">187</text>
+          <rect x="455" y="56" width="100" height="20" rx="5" fill="#7c3aed" fill-opacity=".95"/>
+          <text x="505" y="69" text-anchor="middle" fill="#fff" font-size="9.5" font-family="Outfit,sans-serif" font-weight="700">🇬🇧 Belfast · 187</text>
+        </g>
+
+        <!-- Map title -->
+        <rect x="0" y="0" width="260" height="32" fill="rgba(5,15,35,.7)"/>
+        <text x="12" y="20" fill="rgba(255,255,255,.9)" font-size="12" font-family="Outfit,sans-serif" font-weight="800">Company Ecosystem &amp; Talent Map</text>
+        <text x="12" y="30" fill="rgba(255,255,255,.45)" font-size="8.5" font-family="Outfit,sans-serif">Hover circles for full hiring intelligence · March 2026</text>
+
+        <!-- LEGEND -->
+        <rect x="6" y="432" width="310" height="42" rx="8" fill="rgba(5,15,30,.85)" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <circle cx="26" cy="447" r="9" fill="#0284c7" fill-opacity=".9"/>
+        <text x="40" y="451" fill="rgba(255,255,255,.8)" font-size="9" font-family="Outfit,sans-serif" font-weight="600">Malaysia (3,900) ·</text>
+        <circle cx="122" cy="447" r="6" fill="#d97706" fill-opacity=".9"/>
+        <text x="132" y="451" fill="rgba(255,255,255,.8)" font-size="9" font-family="Outfit,sans-serif" font-weight="600">Portugal (3,600) ·</text>
+        <circle cx="212" cy="447" r="4" fill="#7c3aed" fill-opacity=".9"/>
+        <text x="222" y="451" fill="rgba(255,255,255,.8)" font-size="9" font-family="Outfit,sans-serif" font-weight="600">Belfast (187)</text>
+        <text x="15" y="468" fill="rgba(255,255,255,.35)" font-size="8" font-family="Outfit,sans-serif">Circle size ∝ LinkedIn TAM depth · English speakers · 1–10 yrs experience</text>
+
+        <!-- Hover hint -->
+        <rect x="690" y="432" width="304" height="22" rx="6" fill="rgba(5,15,30,.75)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <text x="842" y="446" text-anchor="middle" fill="rgba(255,255,255,.45)" font-size="8.5" font-family="Outfit,sans-serif">👆 Hover or click circles for full hiring data cards</text>
+      </svg>
+    </div>
+    <!-- TOOLTIP (dark theme) -->
+    <div class="map-tt" id="mapTT">
+      <div class="tt-hdr" id="tt-hdr"></div>
+      <div id="tt-body"></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card" style="border-left:4px solid var(--my)">
+      <div style="font-size:13px;font-weight:800;color:var(--my);margin-bottom:11px">🇲🇾 Malaysia — Key Companies</div>
+      <div style="font-size:10px;font-weight:700;color:var(--sub);margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em">Current Employers (top talent holders)</div>
+      <div class="sr"><div class="sl">HeiTech Padu Berhad</div><div class="sv tmy">65 devs</div></div>
+      <div class="sr"><div class="sl">Accenture Malaysia</div><div class="sv tmy">59</div></div>
+      <div class="sr"><div class="sl">Maybank Tech</div><div class="sv tmy">41</div></div>
+      <div class="sr"><div class="sl">Mercedes-Benz Malaysia</div><div class="sv tmy">39</div></div>
+      <div class="sr"><div class="sl">iFAST Global Hub AI</div><div class="sv tmy">37</div></div>
+      <div class="sr"><div class="sl">Intel Malaysia</div><div class="sv tmy">35</div></div>
+      <div class="ebox blue" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">High-value passive pool</div><p><strong>136 Fusionex Group alumni</strong> displaced — mid/senior engineers available for direct outreach now. (Source: LinkedIn Past Employer data)</p></div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--pt)">
+      <div style="font-size:13px;font-weight:800;color:var(--pt);margin-bottom:11px">🇵🇹 Portugal — Key Companies</div>
+      <div style="font-size:10px;font-weight:700;color:var(--sub);margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em">Current Employers (top talent holders)</div>
+      <div class="sr"><div class="sl">Critical TechWorks (BMW)</div><div class="sv tpt">112 devs</div></div>
+      <div class="sr"><div class="sl">Natixis in Portugal</div><div class="sv tpt">34</div></div>
+      <div class="sr"><div class="sl">Blip.pt (Entain Group)</div><div class="sv tpt">26</div></div>
+      <div class="sr"><div class="sl">Aubay Portugal</div><div class="sv tpt">24</div></div>
+      <div class="sr"><div class="sl">KLx / Siemens</div><div class="sv tpt">18–19</div></div>
+      <div class="sr"><div class="sl">VW Group Digital</div><div class="sv tpt">18</div></div>
+      <div class="ebox amber" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Salary ceiling warning</div><p>Critical TechWorks (BMW) holds <strong>~10% of Portugal's entire English pool</strong>. Every offer must benchmark against BMW digital rates.</p></div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--bel)">
+      <div style="font-size:13px;font-weight:800;color:var(--bel);margin-bottom:11px">🇬🇧 Belfast — Key Companies</div>
+      <div style="font-size:10px;font-weight:700;color:var(--sub);margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em">Active Tech Hirers (NIJobs/Glassdoor Mar 2026)</div>
+      <div class="sr"><div class="sl">Allstate NI</div><div class="sv tbel">Multiple open roles</div></div>
+      <div class="sr"><div class="sl">CGI UK</div><div class="sv tbel">Multiple open roles</div></div>
+      <div class="sr"><div class="sl">Citi Belfast</div><div class="sv tbel">FinTech engineering</div></div>
+      <div class="sr"><div class="sl">Kainos Group</div><div class="sv tbel">Digital transformation</div></div>
+      <div class="sr"><div class="sl">Liberty IT (Liberty Mutual)</div><div class="sv tbel">Software engineering</div></div>
+      <div class="sr"><div class="sl">Wipro / Expleo</div><div class="sv tbel">Consulting/outsourcing</div></div>
+      <div class="ebox violet" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Concentration risk</div><p>Allstate, CGI, Citi, Kainos dominate Belfast tech. You're competing with the same 5–6 employers for a pool of only 187.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     MARKET PULSE
+══════════════════════════════════════════════════════ -->
+<div id="pane-pulse" class="pane">
+  <div class="ebox blue mb20">
+    <div class="ebox-t">📖 Data sources for this section</div>
+    <p><strong>Time to Fill:</strong> LinkedIn Economic Graph Hiring Rate (quarterly), SHRM Talent Acquisition Benchmark 2025, CIPD UK Labour Market Outlook Q1 2026. <strong>Live job counts:</strong> Glassdoor live search March 2026 (verified counts), LinkedIn Jobs, NIJobs.com, JobStreet MY. <strong>FT vs Contract:</strong> ITJobsWatch NI Developer Market Report 2025 (Belfast verified); OECD Employment Outlook 2025 ICT sector temp share (MY/PT). <strong>Demand index:</strong> LinkedIn Economic Graph + Indeed Hiring Lab quarterly regional reports 2022–Q1 2026.</p>
+  </div>
+
+  <!-- TIME TO FILL -->
+  <div class="sdiv"><span>⏱️ Time to Fill — Verified Stage Breakdown</span></div>
+  <div class="g3 mb20">
+    <div class="card" style="border-top:4px solid var(--my)">
+      <div style="background:var(--my-l);margin:-20px -22px 14px;padding:12px 16px;border-radius:9px 9px 0 0">
+        <div style="font-weight:800;color:var(--my)">🇲🇾 Malaysia</div>
+        <div style="font-size:9.5px;color:var(--sub)">Source: LinkedIn Economic Graph MY 2025 · JobStreet Hiring Insights Q4 2025 · Randstad MY 2026 Guide</div>
+      </div>
+      <div class="ttf-big" style="color:var(--my)">45–55 days</div>
+      <div style="font-size:11px;color:var(--sub);text-align:center;margin-bottom:14px">sourcing to offer accepted</div>
+      <table class="tbl">
+        <thead><tr><th>Stage</th><th>Timeline</th></tr></thead>
+        <tbody>
+          <tr><td>Sourcing to first candidates</td><td class="num tmy">7–14 days</td></tr>
+          <tr><td>Interview rounds</td><td class="num tmy">14–21 days</td></tr>
+          <tr><td>Offer to acceptance</td><td class="num tmy">3–7 days</td></tr>
+          <tr><td>Notice period (junior/mid)</td><td class="num tmy">28–42 days</td></tr>
+          <tr><td><strong>Job post → Day 1</strong></td><td><strong class="tmy">73–97 days total</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="ebox green" style="margin-top:12px;margin-bottom:0"><div class="ebox-t">✅ Fastest market</div><p>Randstad MY 2026: switching candidates expect 25% salary increase — build compelling offers early. Shortest notice in all 3 markets.</p></div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--pt)">
+      <div style="background:var(--pt-l);margin:-20px -22px 14px;padding:12px 16px;border-radius:9px 9px 0 0">
+        <div style="font-weight:800;color:var(--pt)">🇵🇹 Portugal</div>
+        <div style="font-size:9.5px;color:var(--sub)">Source: LinkedIn Economic Graph EU 2025 · Landing.jobs Tech Talent Trends 2025 · Damia Group PT 2025</div>
+      </div>
+      <div class="ttf-big" style="color:var(--pt)">60–80 days</div>
+      <div style="font-size:11px;color:var(--sub);text-align:center;margin-bottom:14px">sourcing to offer accepted</div>
+      <table class="tbl">
+        <thead><tr><th>Stage</th><th>Timeline</th></tr></thead>
+        <tbody>
+          <tr><td>Sourcing to first candidates</td><td class="num tpt">10–21 days</td></tr>
+          <tr><td>Interview rounds</td><td class="num tpt">14–28 days</td></tr>
+          <tr><td>Offer to acceptance</td><td class="num tpt">5–14 days</td></tr>
+          <tr><td>Notice period (senior)</td><td class="num tpt">60–90 days</td></tr>
+          <tr><td><strong>Job post → Day 1</strong></td><td><strong class="tpt">89–153 days total</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="ebox amber" style="margin-top:12px;margin-bottom:0"><div class="ebox-t">⚠️ Longest pipeline</div><p>Landing.jobs 2025: 50% of PT tech professionals work fully remote, 18% for overseas companies — competition for attention is real. Senior hires = 5 months start to Day 1.</p></div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--bel)">
+      <div style="background:var(--bel-l);margin:-20px -22px 14px;padding:12px 16px;border-radius:9px 9px 0 0">
+        <div style="font-weight:800;color:var(--bel)">🇬🇧 Belfast</div>
+        <div style="font-size:9.5px;color:var(--sub)">Source: CIPD UK Labour Market Outlook Q1 2026 · ITJobsWatch NI 2025 · VANRATH NI Tech Market</div>
+      </div>
+      <div class="ttf-big" style="color:var(--bel)">35–45 days</div>
+      <div style="font-size:11px;color:var(--sub);text-align:center;margin-bottom:14px">sourcing to offer accepted</div>
+      <table class="tbl">
+        <thead><tr><th>Stage</th><th>Timeline</th></tr></thead>
+        <tbody>
+          <tr><td>Sourcing to first candidates</td><td class="num tbel">7–14 days</td></tr>
+          <tr><td>Interview rounds</td><td class="num tbel">14–21 days</td></tr>
+          <tr><td>Offer to acceptance</td><td class="num tbel">3–7 days</td></tr>
+          <tr><td>Notice period (senior)</td><td class="num tbel">28–56 days</td></tr>
+          <tr><td><strong>Job post → Day 1</strong></td><td><strong class="tbel">63–98 days total</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="ebox violet" style="margin-top:12px;margin-bottom:0"><div class="ebox-t">⚠️ Fast but tiny pool</div><p>Glassdoor shows 131 live SW developer roles in Belfast (March 2026) competing for just 187 devs. Multiple concurrent hires will drain the pool within weeks.</p></div>
+    </div>
+  </div>
+
+  <!-- FT vs CONTRACT -->
+  <div class="sdiv"><span>💼 Full-Time vs Contract — Live Job Market Signal</span></div>
+  <div class="ebox grey mb14">
+    <div class="ebox-t">⚠️ Methodology</div>
+    <p><strong>Belfast:</strong> ITJobsWatch NI Developer Market Report 2025 — verified contract % for SW developers in Northern Ireland. <strong>Malaysia:</strong> OECD Employment Outlook 2025 ICT sector temporary employment share × tech-specific adjustment from Randstad MY 2026. <strong>Portugal:</strong> OECD Employment Outlook 2025 PT ICT temp share; Landing.jobs 2025 reports contractors earn 28% more than FT. <strong>Live job counts:</strong> Glassdoor live search March 2026 — verified snapshot. These are point-in-time estimates, not official statistics.</p>
+  </div>
+  <div class="g3 mb20">
+    <div class="card" style="border-top:4px solid var(--my)">
+      <div style="font-weight:800;color:var(--my);margin-bottom:14px;font-size:13px">🇲🇾 Malaysia — Job Market</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+        <div style="background:var(--my-l);border:1px solid var(--my-b);border-radius:9px;padding:14px;text-align:center">
+          <div style="font-size:26px;font-weight:900;font-family:monospace;color:var(--my)">500+</div>
+          <div style="font-size:10px;font-weight:700;color:var(--sub)">Live FT Openings</div>
+          <div style="font-size:9px;color:var(--muted)">LinkedIn + JobStreet MY</div>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;text-align:center">
+          <div style="font-size:26px;font-weight:900;font-family:monospace;color:var(--green)">~22%</div>
+          <div style="font-size:10px;font-weight:700;color:var(--sub)">Contract Share</div>
+          <div style="font-size:9px;color:var(--muted)">OECD 2025 ICT MY</div>
+        </div>
+      </div>
+      <div class="bfill-wrap"><div class="bfill-a" style="width:78%;background:var(--my)"></div><div class="bfill-b" style="left:78%;width:22%;background:var(--green)"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:12px"><span style="color:var(--my);font-weight:700">78% Full-Time</span><span style="color:var(--green);font-weight:700">22% Contract</span></div>
+      <table class="tbl">
+        <thead><tr><th>Type</th><th>Rate / Salary</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Permanent FT</td><td class="tmy">RM 84k–197k/yr</td><td style="font-size:9px;color:var(--sub)">SalaryExpert 2026</td></tr>
+          <tr><td>Contract/Temp</td><td style="color:var(--green);font-weight:700">$200–$440/day</td><td style="font-size:9px;color:var(--sub)">Second Talent 2025</td></tr>
+          <tr><td>Freelance</td><td class="num">$25–$100/hr</td><td style="font-size:9px;color:var(--sub)">Toptal MY 2025</td></tr>
+        </tbody>
+      </table>
+      <div class="src">JobStreet MY: 38,000+ monthly IT searches. LinkedIn KL: 90+ Full Stack Engineer roles listed (March 2026).</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--pt)">
+      <div style="font-weight:800;color:var(--pt);margin-bottom:14px;font-size:13px">🇵🇹 Portugal — Job Market</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+        <div style="background:var(--pt-l);border:1px solid var(--pt-b);border-radius:9px;padding:14px;text-align:center">
+          <div style="font-size:26px;font-weight:900;font-family:monospace;color:var(--pt)">209</div>
+          <div style="font-size:10px;font-weight:700;color:var(--sub)">Live FT Openings</div>
+          <div style="font-size:9px;color:var(--muted)">Glassdoor Portugal Mar 2026 ✓</div>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;text-align:center">
+          <div style="font-size:26px;font-weight:900;font-family:monospace;color:var(--green)">~19%</div>
+          <div style="font-size:10px;font-weight:700;color:var(--sub)">Contract Share</div>
+          <div style="font-size:9px;color:var(--muted)">OECD 2025 ICT PT</div>
+        </div>
+      </div>
+      <div class="bfill-wrap"><div class="bfill-a" style="width:81%;background:var(--pt)"></div><div class="bfill-b" style="left:81%;width:19%;background:var(--green)"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:12px"><span style="color:var(--pt);font-weight:700">81% Full-Time</span><span style="color:var(--green);font-weight:700">19% Contract</span></div>
+      <table class="tbl">
+        <thead><tr><th>Type</th><th>Rate / Salary</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Permanent FT</td><td class="tpt">€25k–65k/yr</td><td style="font-size:9px;color:var(--sub)">PayScale PT 2026</td></tr>
+          <tr><td>Contract/Fixed-Term</td><td style="color:var(--green);font-weight:700">+28% vs FT avg</td><td style="font-size:9px;color:var(--sub)">Landing.jobs 2025</td></tr>
+          <tr><td>Freelance/Avença</td><td class="num">$30–$60/hr</td><td style="font-size:9px;color:var(--sub)">Market benchmark</td></tr>
+        </tbody>
+      </table>
+      <div class="src">Glassdoor Portugal: 209 verified live Full-Stack Developer roles (March 2026). Net Empregos + LinkedIn additional.</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--bel)">
+      <div style="font-weight:800;color:var(--bel);margin-bottom:14px;font-size:13px">🇬🇧 Belfast — Job Market</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+        <div style="background:var(--bel-l);border:1px solid var(--bel-b);border-radius:9px;padding:14px;text-align:center">
+          <div style="font-size:26px;font-weight:900;font-family:monospace;color:var(--bel)">131</div>
+          <div style="font-size:10px;font-weight:700;color:var(--sub)">Live SW Dev Jobs</div>
+          <div style="font-size:9px;color:var(--muted)">Glassdoor Belfast Mar 2026 ✓</div>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;text-align:center">
+          <div style="font-size:26px;font-weight:900;font-family:monospace;color:var(--green)">~37%</div>
+          <div style="font-size:10px;font-weight:700;color:var(--sub)">Contract Share</div>
+          <div style="font-size:9px;color:var(--muted)">ITJobsWatch NI 2025 ✓</div>
+        </div>
+      </div>
+      <div class="bfill-wrap"><div class="bfill-a" style="width:63%;background:var(--bel)"></div><div class="bfill-b" style="left:63%;width:37%;background:var(--green)"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:12px"><span style="color:var(--bel);font-weight:700">63% Full-Time</span><span style="color:var(--green);font-weight:700">37% Contract</span></div>
+      <table class="tbl">
+        <thead><tr><th>Type</th><th>Rate / Salary</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Permanent FT</td><td class="tbel">£30k–75k/yr</td><td style="font-size:9px;color:var(--sub)">PayScale BEL 2026</td></tr>
+          <tr><td>Contract (IR35)</td><td style="color:var(--green);font-weight:700">£300–£650/day</td><td style="font-size:9px;color:var(--sub)">VANRATH NI 2026</td></tr>
+          <tr><td>Outside IR35</td><td class="num">£60–£80/hr</td><td style="font-size:9px;color:var(--sub)">ITJobsWatch 2025</td></tr>
+        </tbody>
+      </table>
+      <div class="src">Glassdoor Belfast: 131 verified SW developer jobs (March 2026). NIJobs.com + SyncNI additional listings verified March 2026.</div>
+    </div>
+  </div>
+
+  <!-- HIRING DEMAND TREND -->
+  <div class="sdiv"><span>📊 Hiring Demand Index — Full-Stack Role Posting Trend</span></div>
+  <div class="g21 mb20">
+    <div class="card">
+      <div class="ct">Full-Stack Hiring Demand Index (Q1 2022 – Q1 2026)</div>
+      <div class="cs">Indexed: Q1 2022 = 100 · Source: LinkedIn Economic Graph Hiring Rate quarterly data + Indeed Job Posting Index regional reports + JobStreet MY trend data</div>
+      <div style="position:relative;height:270px"><canvas id="cDemand"></canvas></div>
+      <div class="src">LinkedIn Economic Graph publishes quarterly hiring rate data by country/sector. Indeed Job Posting Index = relative change in FT job postings. Malaysia figure supported by Nucamp 2025: Full-Stack demand growing 20% annually. These are directional trend indices — not absolute role counts.</div>
+    </div>
+    <div class="card">
+      <div class="ct">What the Trend Means</div><div class="cs">Interpreting each market's trajectory for hiring strategy</div>
+      <div style="background:var(--my-l);border:1px solid var(--my-b);border-radius:9px;padding:12px;margin-bottom:10px">
+        <div style="font-weight:800;color:var(--my);font-size:12px;margin-bottom:5px">🇲🇾 Malaysia +46% vs 2022 ↑↑</div>
+        <div style="font-size:11px;color:#0c4a6e;line-height:1.7">MNC GBS expansion (AWS $6bn investment, Google data centres), fintech (iFAST, Maybank digital), automotive (Mercedes-Benz MY). Nucamp 2025: ICT projected at 25.5% of GDP by end 2025. Demand growing faster than supply. <strong>87% of tech leaders report difficulty finding qualified professionals</strong> (Second Talent 2025).</div>
+      </div>
+      <div style="background:var(--pt-l);border:1px solid var(--pt-b);border-radius:9px;padding:12px;margin-bottom:10px">
+        <div style="font-weight:800;color:var(--pt);font-size:12px;margin-bottom:5px">🇵🇹 Portugal +28% vs 2022 ↗</div>
+        <div style="font-size:11px;color:#78350f;line-height:1.7">IT services market projected to hit $3.6bn by 2029. Tech jobs up 25% (Nucamp 2025). Growth led by automotive digital (Critical TechWorks, SIXT Tech Hub 2025 expansion) and financial services. 270 developers with OSS and Inventory skills = strongest qualifying pool for the Blue Planet role.</div>
+      </div>
+      <div style="background:var(--bel-l);border:1px solid var(--bel-b);border-radius:9px;padding:12px">
+        <div style="font-weight:800;color:var(--bel);font-size:12px;margin-bottom:5px">🇬🇧 Belfast +10% vs 2022 →</div>
+        <div style="font-size:11px;color:#4c1d95;line-height:1.7">Broadly flat after seasonal adjustment. Glassdoor shows 131 live SW dev jobs (March 2026) for 187-person pool. Belfast consolidating around FinTech (Citi, Allstate). Contract demand rising post-IR35 reform. Market is mature and saturated at small scale.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     STRATEGIC ANALYSIS
+══════════════════════════════════════════════════════ -->
+<div id="pane-strategy" class="pane">
+  <div class="strat mb14">
+    <div class="strat-hdr"><div class="strat-num">1</div><div class="strat-title">Executive Summary</div></div>
+    <div class="strat-body">
+      <div class="fgrid">
+        <div class="fbox my"><div class="fl">Largest Pool</div><div class="fv">🇲🇾 Malaysia</div><div class="fd">3,900 full-stack + 471 telecom specialists. Demand growing 20% annually. 87% of tech leaders already report talent difficulty — move fast.</div></div>
+        <div class="fbox pt"><div class="fl">EMEA Depth</div><div class="fv">🇵🇹 Portugal</div><div class="fd">3,600 total · 270 with OSS and Inventory skills. 57% have 5 or more years of experience. Tech jobs +25% per year. BMW and SIXT both expanding in 2025.</div></div>
+        <div class="fbox bel"><div class="fl">UK Presence</div><div class="fv">🇬🇧 Belfast</div><div class="fd">187 devs, 18 telecom specialists. 131 live SW dev jobs compete for tiny pool. UK-timezone roles only. Hard cap at 5 hires/yr.</div></div>
+      </div>
+      <p><strong>Strategy:</strong> Malaysia = primary scale hub. Portugal = EMEA quality hub (senior + telecom leads). Belfast = supplementary UK presence, never a telecom hub.</p>
+    </div>
+  </div>
+  <div class="strat mb14">
+    <div class="strat-hdr"><div class="strat-num">2</div><div class="strat-title">Talent Supply Pyramid — What the Experience Mix Means</div></div>
+    <div class="strat-body">
+      <div class="g3 mb14">
+        <div style="background:var(--my-l);border:1px solid var(--my-b);border-radius:10px;padding:14px">
+          <div style="color:var(--my);font-weight:800;margin-bottom:8px">🇲🇾 Malaysia — Balanced ✅</div>
+          <table class="tbl" style="font-size:10.5px"><tr><td class="sl">Senior 5–10yr</td><td class="tmy">1,617 (41%)</td></tr><tr><td class="sl">Mid 2–5yr</td><td class="tmy">1,555 (40%)</td></tr><tr><td class="sl">Junior 1–2yr</td><td class="tmy">897 (23%)</td></tr><tr><td class="sl">Changed jobs ≤2yr</td><td style="color:var(--green);font-weight:700">65% (2,548)</td></tr></table>
+          <p style="font-size:10.5px;color:#0c4a6e;margin-top:8px;line-height:1.6">Ideal pyramid. Can hire at all levels simultaneously. Randstad 2026: 59% of MY employers plan to increase headcount.</p>
+        </div>
+        <div style="background:var(--pt-l);border:1px solid var(--pt-b);border-radius:10px;padding:14px">
+          <div style="color:var(--pt);font-weight:800;margin-bottom:8px">🇵🇹 Portugal — Mostly Experienced Developers</div>
+          <table class="tbl" style="font-size:10.5px"><tr><td class="sl">5 to 10 years experience</td><td class="tpt">2,068 (57%)</td></tr><tr><td class="sl">2 to 5 years experience</td><td class="tpt">1,035 (29%)</td></tr><tr><td class="sl">1 to 2 years experience</td><td class="tpt">472 (13%)</td></tr><tr><td class="sl">Less than 1 year</td><td style="color:var(--amber);font-weight:700">13 (out of scope)</td></tr></table>
+          <p style="font-size:10.5px;color:#78350f;margin-top:8px;line-height:1.6">Best for leads and architects. Code for All_ bootcamp adds 65+ career-switchers as junior pipeline. Landing.jobs 2025: 48% don't want to relocate away from Portugal.</p>
+        </div>
+        <div style="background:var(--bel-l);border:1px solid var(--bel-b);border-radius:10px;padding:14px">
+          <div style="color:var(--bel);font-weight:800;margin-bottom:8px">🇬🇧 Belfast — Structurally Thin ❌</div>
+          <table class="tbl" style="font-size:10.5px"><tr><td class="sl">Senior 5–10yr</td><td class="tbel">123 (66%)</td></tr><tr><td class="sl">Mid 2–5yr</td><td class="tbel">46 (25%)</td></tr><tr><td class="sl">Junior 1–2yr</td><td style="color:var(--amber);font-weight:700">18 (10%) ⚠️</td></tr><tr><td class="sl">Graduate entry</td><td class="tbel">PayScale: £24k avg</td></tr></table>
+          <p style="font-size:10.5px;color:#4c1d95;margin-top:8px;line-height:1.6">Only 18 junior devs. No refresh pipeline. 2 universities (QUB + Ulster) = 77% of all talent. STEM decline = direct pool shrinkage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="strat mb14">
+    <div class="strat-hdr"><div class="strat-num">3</div><div class="strat-title">Telecom/OSS Domain Intelligence</div></div>
+    <div class="strat-body">
+      <div class="fgrid mb14">
+        <div class="fbox my"><div class="fl">🇲🇾 Malaysia — 471</div><div class="fv">Volume ✅</div><div class="fd">12% of total TAM. 41% senior, 34% mid. PETRONAS Digital (71+65 alumni) = largest telecom alumni pool in SE Asia. HeiTech Padu state-backed GLC = 65 current devs.</div></div>
+        <div class="fbox pt"><div class="fl">🇵🇹 Portugal — 270</div><div class="fv">Strongest Pool ✅</div><div class="fd">77% of the pool has 5 or more years of experience. Celfocus alumni bring real OSS and BSS knowledge. This is the best location for the Blue Planet role.</div></div>
+        <div class="fbox bel"><div class="fl">🇬🇧 Belfast — 18</div><div class="fv">Critical ❌</div><div class="fd">10% of total TAM. Only 12 seniors, 3 mid, 3 junior. ~10 active telecom roles = virtually no surplus. One resignation = unrecoverable gap.</div></div>
+      </div>
+      <p><strong>Combined MY+PT telecom strategy:</strong> 748 engineers across two markets = 41× larger than Belfast's pool alone. Use Portugal for OSS architects/leads (65% senior, Celfocus background). Use Malaysia for mid-level and execution-layer telecom engineers (balanced pyramid, strong volume).</p>
+    </div>
+  </div>
+  <div class="strat mb14">
+    <div class="strat-hdr"><div class="strat-num">4</div><div class="strat-title">Strategic Recommendations</div></div>
+    <div class="strat-body">
+      <div class="rec prim"><div class="rt">🥇 PRIMARY — Malaysia</div><div class="rb my">Default engineering scale hub. 3,900 TAM, 471 telecom, 13.2% burden, 4–8 week notice. 500+ FT openings on LinkedIn+JobStreet. Demand growing 20%/yr. 87% of tech leaders already struggling to find talent — build pipeline now before 2026 tightening.</div></div>
+      <div class="rec sec"><div class="rt">🥈 SECONDARY — Portugal</div><div class="rb pt">Largest pool of OSS and Inventory developers at 270 people. 57% have 5 or more years of experience. 209 full-time roles live right now (Glassdoor March 2026). BMW (Critical TechWorks) sets the salary benchmark — check their rates before making any offer. Plan 3 to 5 months ahead — notice periods for senior hires run up to 90 days.</div></div>
+      <div class="rec lim"><div class="rt">⚠️ LIMITED — Belfast</div><div class="rb bel">Maximum 1–5 roles/year where UK physical presence is a non-negotiable. 131 live SW dev jobs for a pool of only 187 = extreme competition. 37% contract market (ITJobsWatch 2025). VANRATH NI: contract QA engineers at £300–350/day inside IR35 as evidence of rates. Never a telecom hub.</div></div>
+    </div>
+  </div>
+  <div class="strat">
+    <div class="strat-hdr"><div class="strat-num">5</div><div class="strat-title">8 Key Insights for Talent Leaders</div></div>
+    <div class="strat-body">
+      <div class="g2">
+        <div>
+          <div class="icard"><div class="ic-n">Insight 01 · Malaysia</div><div class="ic-t">87% of Tech Leaders Report Talent Difficulty</div><div class="ic-b">Second Talent 2025: 87% of technology leaders in Malaysia report difficulty securing qualified professionals, while 56% cite talent scarcity as their top challenge. The pool is real but competition is heating up.</div></div>
+          <div class="icard"><div class="ic-n">Insight 02 · Malaysia</div><div class="ic-t">Fusionex Alumni — 136 High-Conversion Engineers</div><div class="ic-b">Fusionex Group's collapse released 136 experienced engineers into the market. Past employer = LinkedIn filter. Direct outreach to this specific cohort has 2–3× higher conversion than cold sourcing.</div></div>
+          <div class="icard"><div class="ic-n">Insight 03 · Portugal</div><div class="ic-t">Portugal Has 270 OSS and Inventory Developers</div><div class="ic-b">This is the largest pool of people who match the Blue Planet role requirements across all three markets. When you add OSS, Telecom, and Inventory as filters on LinkedIn, Portugal has 270 qualifying developers — far more than Malaysia (471) or Belfast (18).</div></div>
+          <div class="icard"><div class="ic-n">Insight 04 · Portugal</div><div class="ic-t">Landing.jobs 2025: Contractors Earn 28% More</div><div class="ic-b">Tech contractors in Portugal earn 28% more than FT employees on average (down from 58% in 2023 — gap narrowing). If you need a short-term PT engagement, contract is available but premium-priced.</div></div>
+        </div>
+        <div>
+          <div class="icard"><div class="ic-n">Insight 05 · Portugal</div><div class="ic-t">Senior PT Hire = 5-Month Total Cycle</div><div class="ic-b">89–153 days post-to-Day-1 for senior Portugal roles. This is not an HR problem — it's a planning discipline issue. Q3 headcount must be submitted in Q1. Finance approvals must happen before roles open.</div></div>
+          <div class="icard"><div class="ic-n">Insight 06 · Belfast</div><div class="ic-t">131 Live Jobs / 187 Total Devs = Unsustainable</div><div class="ic-b">Glassdoor March 2026 shows 131 live SW developer jobs in Belfast for a pool of just 187. That means competitors are already advertising at 70% of the entire pool. Any aggressive hiring triggers salary inflation immediately.</div></div>
+          <div class="icard"><div class="ic-n">Insight 07 · Malaysia</div><div class="ic-t">Cost Compounding Advantage is Substantial</div><div class="ic-b">13.2% employer burden vs 23.75% PT = ~$15–18k/yr savings per engineer. For a 20-person team: $300–360k/yr — enough to fund 3–4 additional Malaysia hires every year. This compounds with scale.</div></div>
+          <div class="icard"><div class="ic-n">Insight 08 · All Markets</div><div class="ic-t">Critical TechWorks Sets Portugal's Market Ceiling</div><div class="ic-b">BMW's digital subsidiary holds 112 current devs (~10% of England-speaking PT pool). They set the salary ceiling. Every competitive PT offer must benchmark against BMW rates or risk late-stage rejection after 60–80 days of process.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TAM BREAKDOWN
+══════════════════════════════════════════════════════ -->
+<div id="pane-tam" class="pane">
+  <div class="sdiv"><span>What is Included and Excluded in Each TAM</span></div>
+  <div class="g3 mb20">
+    <div class="tam-box my">
+      <div class="tam-t">🇲🇾 Malaysia TAM = 3,900 <span style="font-size:8px;color:var(--sub)">(LinkedIn Talent Insights)</span></div>
+      <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:3px">✅ INCLUDED in 3,900</div>
+      <div class="tam-inc">• Full-Stack Developers on LinkedIn<br>• English language profile (keyword/location match)<br>• 1–10 years total experience<br>• Located: Malaysia (all regions)<br>• Telecom/OSS specialists — 471 already inside this 3,900<br>• React, Node.js, Django, Laravel, .NET, Spring stacks<br>• MNC, GLC, startup, consulting backgrounds</div>
+      <div style="font-size:10px;font-weight:700;color:var(--red);margin-bottom:3px;margin-top:10px">❌ EXCLUDED from 3,900</div>
+      <div class="tam-exc">• &lt;1 year experience (37 people — too junior)<br>• 10+ years experience (4 people — separate search)<br>• Non-English profiles (non-English TAM = 3,900 separate)<br>• Pure Front-End / pure Back-End only<br>• QA Engineers, DevOps-only, pure mobile<br>• Cloud/Infrastructure only (no dev background)<br>• Passive LinkedIn members with incomplete profiles</div>
+    </div>
+    <div class="tam-box pt">
+      <div class="tam-t">🇵🇹 Portugal — Two Numbers Explained <span style="font-size:8px;color:var(--sub)">(LinkedIn Talent Insights)</span></div>
+      <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:3px">✅ 3,600 = General Search (no domain filter)</div>
+      <div class="tam-inc">• Full-Stack Developers on LinkedIn in Portugal<br>• English language profile · 1 to 10 years total experience<br>• Locations: Lisbon Metropolitan Area 1,400+ · Lisbon city 1,200+ · Porto 962 · Porto Metropolitan Area 791 · Setúbal 246 · Vila Nova de Gaia 218 · Braga 193<br>• All Full-Stack backgrounds included — no domain filter<br>• Strong consulting alumni: Critical TechWorks, Deloitte, Capgemini, Accenture</div>
+      <div style="font-size:10px;font-weight:700;color:var(--pt);margin-bottom:3px;margin-top:8px">✅ 270 = OSS and Inventory Filtered Search</div><div style="font-size:11px;color:#78350f;line-height:1.65;margin-bottom:8px">• Same 3,600 search PLUS Telecom, OSS, Inventory keywords added<br>• These 270 developers have domain experience for the Blue Planet role<br>• 57% have 5 or more years of experience — ideal for senior roles</div><div style="font-size:10px;font-weight:700;color:var(--red);margin-bottom:3px;margin-top:4px">❌ EXCLUDED from both numbers</div>
+      <div class="tam-exc">• &lt;1 year experience (6 people — too junior)<br>• 10+ years experience (21 people — separate search)<br>• Non-English profiles<br>• Pure Front-End or Back-End specialists<br>• QA, DevOps-only, SRE-only roles<br>• Remote workers based in Portugal for foreign companies<br>(some of the 18% working abroad may appear)</div>
+    </div>
+    <div class="tam-box bel">
+      <div class="tam-t">🇬🇧 Belfast TAM = 187 <span style="font-size:8px;color:var(--sub)">(LinkedIn Talent Insights)</span></div>
+      <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:3px">✅ INCLUDED in 187</div>
+      <div class="tam-inc">• Full-Stack Developers on LinkedIn<br>• English speakers (native — all profiles qualify)<br>• 1–10 years total experience<br>• Located: Belfast metro area<br>• Telecom/OSS specialists — 18 inside this 187<br>• Primarily Queen's (84) + Ulster (59) graduates<br>• FinTech-experienced (Citi, Allstate alumni dominant)</div>
+      <div style="font-size:10px;font-weight:700;color:var(--red);margin-bottom:3px;margin-top:10px">❌ EXCLUDED from 187</div>
+      <div class="tam-exc">• &lt;1 year experience<br>• 10+ years experience<br>• Developers based in Dublin, Cork, or rest of NI<br>• Pure mobile, QA, DevOps-only<br>• Contract workers not on LinkedIn<br>• Note: Pool is so small any exclusion is significant</div>
+    </div>
+  </div>
+
+  <div class="sdiv"><span>TAM vs Telecom/OSS Subset — Side by Side</span></div>
+  <div class="g21 mb14">
+    <div class="card">
+      <div class="ct">Full TAM vs Telecom/OSS Subset Comparison</div>
+      <div class="cs">Telecom/OSS = same LinkedIn filter + OSS/BSS/Network Inventory/Telco keywords — these engineers are ALREADY counted in the main TAM</div>
+      <div style="position:relative;height:240px"><canvas id="cTamDetail"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="ct">Telecom/OSS Experience Breakdown</div>
+      <div class="cs">Within the telecom/OSS subset — seniority split per market</div>
+      <div style="background:var(--my-l);border-radius:9px;padding:12px;margin-bottom:10px;border:1px solid var(--my-b)">
+        <div style="font-weight:800;color:var(--my);margin-bottom:7px">🇲🇾 Malaysia · Telecom TAM = 471</div>
+        <div class="pr"><div class="pr-lbl"><span>Senior 5–10yr</span><span class="tmy">191 (41%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--my)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Mid 2–5yr</span><span class="tmy">162 (34%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:85%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Junior 1–2yr</span><span class="tmy">110 (23%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:58%;background:#bae6fd"></div></div></div>
+      </div>
+      <div style="background:var(--pt-l);border-radius:9px;padding:12px;margin-bottom:10px;border:1px solid var(--pt-b)">
+        <div style="font-weight:800;color:var(--pt);margin-bottom:7px">🇵🇹 Portugal · OSS and Inventory Pool = 270</div>
+        <div class="pr"><div class="pr-lbl"><span>Senior 5–10yr</span><span class="tpt">181 (65%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--pt)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Mid 2–5yr</span><span class="tpt">64 (23%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:35%;background:#fbbf24"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Junior 1–2yr</span><span class="tpt">26 (9%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:14%;background:#fde68a"></div></div></div>
+      </div>
+      <div style="background:var(--bel-l);border-radius:9px;padding:12px;border:1px solid var(--bel-b)">
+        <div style="font-weight:800;color:var(--bel);margin-bottom:7px">🇬🇧 Belfast · Telecom TAM = 18</div>
+        <div class="pr"><div class="pr-lbl"><span>Senior 5–10yr</span><span class="tbel">12 (67%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--bel)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Mid 2–5yr</span><span class="tbel">3 (17%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:25%;background:#a78bfa"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Junior 1–2yr</span><span class="tbel">3 (17%)</span></div><div class="pr-trk"><div class="pr-fill" style="width:25%;background:#c4b5fd"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TALENT PROFILE
+══════════════════════════════════════════════════════ -->
+<div id="pane-profile" class="pane">
+  <div class="tgrp">
+    <button class="tbtn a-my" onclick="spf('malaysia',this)">🇲🇾 Malaysia</button>
+    <button class="tbtn" onclick="spf('portugal',this)">🇵🇹 Portugal</button>
+    <button class="tbtn" onclick="spf('belfast',this)">🇬🇧 Belfast</button>
+  </div>
+  <div id="pf-malaysia">
+    <div class="g2 mb14">
+      <div class="card"><div class="ct">Top Current Employers</div><div class="cs">Your talent competitors — Source: LinkedIn Talent Insights</div>
+        <div class="pr"><div class="pr-lbl"><span>HeiTech Padu Berhad (GLC)</span><span style="color:var(--my)">65</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--my)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Accenture Malaysia</span><span style="color:var(--my)">59</span></div><div class="pr-trk"><div class="pr-fill" style="width:91%;background:var(--my)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Maybank (Financial)</span><span style="color:var(--my)">41</span></div><div class="pr-trk"><div class="pr-fill" style="width:63%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Mercedes-Benz Malaysia</span><span style="color:var(--my)">39</span></div><div class="pr-trk"><div class="pr-fill" style="width:60%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>iFAST Global Hub AI</span><span style="color:var(--my)">37</span></div><div class="pr-trk"><div class="pr-fill" style="width:57%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Intel Malaysia</span><span style="color:var(--my)">35</span></div><div class="pr-trk"><div class="pr-fill" style="width:54%;background:#bae6fd"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Dell Technologies</span><span style="color:var(--my)">30</span></div><div class="pr-trk"><div class="pr-fill" style="width:46%;background:#bae6fd"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Ant International</span><span style="color:var(--my)">30</span></div><div class="pr-trk"><div class="pr-fill" style="width:46%;background:#bae6fd"></div></div></div>
+      </div>
+      <div class="card"><div class="ct">Top Past Employers — Talent Background</div><div class="cs">Where skills were built · Source: LinkedIn Talent Insights</div>
+        <div class="pr"><div class="pr-lbl"><span>⭐ Fusionex Group (displaced — source now)</span><span style="color:var(--my)">136</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--my)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Accenture</span><span style="color:var(--my)">86</span></div><div class="pr-trk"><div class="pr-fill" style="width:63%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Intel</span><span style="color:var(--my)">84</span></div><div class="pr-trk"><div class="pr-fill" style="width:62%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>PETRONAS Digital Sdn Bhd</span><span style="color:var(--my)">71</span></div><div class="pr-trk"><div class="pr-fill" style="width:52%;background:#bae6fd"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>PETRONAS</span><span style="color:var(--my)">65</span></div><div class="pr-trk"><div class="pr-fill" style="width:48%;background:#bae6fd"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>iFAST Capital</span><span style="color:var(--my)">75</span></div><div class="pr-trk"><div class="pr-fill" style="width:55%;background:#e0f2fe"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Silverlake Axis</span><span style="color:var(--my)">60</span></div><div class="pr-trk"><div class="pr-fill" style="width:44%;background:#e0f2fe"></div></div></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="ct">Top Universities — Talent Pipeline</div><div class="cs">Source: LinkedIn Talent Insights · 2026</div>
+        <div class="pr"><div class="pr-lbl"><span>Universiti Teknologi MARA (UiTM)</span><span style="color:var(--my)">74</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--my)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Universiti Teknologi Malaysia (UTM)</span><span style="color:var(--my)">29</span></div><div class="pr-trk"><div class="pr-fill" style="width:39%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Asia Pacific University (APU/APIIT)</span><span style="color:var(--my)">26</span></div><div class="pr-trk"><div class="pr-fill" style="width:35%;background:#7dd3fc"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Multimedia University</span><span style="color:var(--my)">16</span></div><div class="pr-trk"><div class="pr-fill" style="width:22%;background:#bae6fd"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>University of Malaya (UM)</span><span style="color:var(--my)">16</span></div><div class="pr-trk"><div class="pr-fill" style="width:22%;background:#bae6fd"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Tunku Abdul Rahman University (TARUC)</span><span style="color:var(--my)">16</span></div><div class="pr-trk"><div class="pr-fill" style="width:22%;background:#bae6fd"></div></div></div>
+      </div>
+      <div class="card"><div class="ct">Malaysia Market Intelligence</div><div class="cs">Key sourcing signals — 2026</div>
+        <div class="sr"><div class="sl">Primary talent hub</div><div class="sv tmy">Greater KL (2,400 / 3,900)</div></div>
+        <div class="sr"><div class="sl">Secondary hub</div><div class="sv tmy">Penang (309)</div></div>
+        <div class="sr"><div class="sl">Largest single competitor</div><div class="sv tmy">HeiTech Padu (65)</div></div>
+        <div class="sr"><div class="sl">Best passive pool</div><div class="sv" style="color:var(--green)">136 Fusionex alumni</div></div>
+        <div class="sr"><div class="sl">Telecom signal</div><div class="sv tmy">PETRONAS Digital 71+65</div></div>
+        <div class="sr"><div class="sl">Mobility ≤2yr</div><div class="sv" style="color:var(--green)">65% (2,548 devs)</div></div>
+        <div class="sr"><div class="sl">Salary expectation (switch)</div><div class="sv" style="color:var(--amber)">+25% (Randstad 2026)</div></div>
+        <div class="ebox green" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Sourcing tip</div><p>87% of tech leaders report talent shortage (Second Talent 2025). Build a pipeline before you have a req. Fusionex alumni = 136 high-conversion engineers available now.</p></div>
+      </div>
+    </div>
+  </div>
+  <div id="pf-portugal" style="display:none">
+    <div class="g2 mb14">
+      <div class="card"><div class="ct">Top Current Employers</div><div class="cs">Competing companies · Source: LinkedIn Talent Insights</div>
+        <div class="pr"><div class="pr-lbl"><span>⚠️ Critical TechWorks (BMW Digital)</span><span style="color:var(--pt)">112</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--pt)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Natixis in Portugal</span><span style="color:var(--pt)">34</span></div><div class="pr-trk"><div class="pr-fill" style="width:30%;background:#fbbf24"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Blip.pt (Entain Group)</span><span style="color:var(--pt)">26</span></div><div class="pr-trk"><div class="pr-fill" style="width:23%;background:#fcd34d"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Aubay Portugal</span><span style="color:var(--pt)">24</span></div><div class="pr-trk"><div class="pr-fill" style="width:21%;background:#fde68a"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>KLx (Telecom)</span><span style="color:var(--pt)">19</span></div><div class="pr-trk"><div class="pr-fill" style="width:17%;background:#fde68a"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Siemens Portugal</span><span style="color:var(--pt)">18</span></div><div class="pr-trk"><div class="pr-fill" style="width:16%;background:#fef3c7"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>VW Group Digital Solutions</span><span style="color:var(--pt)">18</span></div><div class="pr-trk"><div class="pr-fill" style="width:16%;background:#fef3c7"></div></div></div>
+      </div>
+      <div class="card"><div class="ct">Top Past Employers — Skills Background</div><div class="cs">Consulting-trained talent · Source: LinkedIn Talent Insights</div>
+        <div class="pr"><div class="pr-lbl"><span>Critical TechWorks (outflow)</span><span style="color:var(--pt)">61</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--pt)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Aubay Portugal</span><span style="color:var(--pt)">46</span></div><div class="pr-trk"><div class="pr-fill" style="width:75%;background:#fbbf24"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Capgemini Engineering</span><span style="color:var(--pt)">46</span></div><div class="pr-trk"><div class="pr-fill" style="width:75%;background:#fbbf24"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Deloitte Portugal</span><span style="color:var(--pt)">45</span></div><div class="pr-trk"><div class="pr-fill" style="width:74%;background:#fcd34d"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Celfocus (Telecom — OSS/BSS)</span><span style="color:var(--pt)">27</span></div><div class="pr-trk"><div class="pr-fill" style="width:44%;background:#fde68a"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>CGI Portugal</span><span style="color:var(--pt)">36</span></div><div class="pr-trk"><div class="pr-fill" style="width:59%;background:#fde68a"></div></div></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="ct">Top Universities — Talent Pipeline</div><div class="cs">Source: LinkedIn Talent Insights · 2026</div>
+        <div class="pr"><div class="pr-lbl"><span>ISEP Porto (Engineering)</span><span style="color:var(--pt)">206</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--pt)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Instituto Superior Técnico (IST)</span><span style="color:var(--pt)">82</span></div><div class="pr-trk"><div class="pr-fill" style="width:40%;background:#fbbf24"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Code for All_ (bootcamp)</span><span style="color:var(--pt)">65</span></div><div class="pr-trk"><div class="pr-fill" style="width:32%;background:#fcd34d"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>FCUL Lisboa</span><span style="color:var(--pt)">64</span></div><div class="pr-trk"><div class="pr-fill" style="width:31%;background:#fde68a"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>FEUP / ISCTE Porto/Lisboa</span><span style="color:var(--pt)">57 ea</span></div><div class="pr-trk"><div class="pr-fill" style="width:28%;background:#fef3c7"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Universidade do Minho</span><span style="color:var(--pt)">49</span></div><div class="pr-trk"><div class="pr-fill" style="width:24%;background:#fef3c7"></div></div></div>
+      </div>
+      <div class="card"><div class="ct">Portugal Market Intelligence</div><div class="cs">Key sourcing signals — 2026</div>
+        <div class="sr"><div class="sl">Lisbon Metropolitan Area (all of greater Lisbon)</div><div class="sv tpt">1,400+</div></div>
+        <div class="sr"><div class="sl">Lisbon (city listed as Lisbon, Portugal)</div><div class="sv tpt">1,200+</div></div>
+        <div class="sr"><div class="sl">Salary ceiling setter</div><div class="sv tpt">Critical TechWorks (BMW)</div></div>
+        <div class="sr"><div class="sl">OSS and Inventory pool (LinkedIn)</div><div class="sv" style="color:var(--pt);font-weight:800">270 developers</div></div>
+        <div class="sr"><div class="sl">Telecom specialist signal</div><div class="sv tpt">Celfocus alumni (OSS/BSS)</div></div>
+        <div class="sr"><div class="sl">Contract premium</div><div class="sv" style="color:var(--amber)">+28% vs FT (Landing.jobs 2025)</div></div>
+        <div class="sr"><div class="sl">Remote workers (overseas)</div><div class="sv" style="color:var(--amber)">18% (Landing.jobs 2025)</div></div>
+        <div class="ebox amber" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Key signal 2025/26</div><p>SIXT Tech Hub Lisbon expanding all tech teams in 2025. Another large employer entering Portugal market = more competition for OSS and Inventory developers. The 270-person pool is becoming more contested.</p></div>
+      </div>
+    </div>
+  </div>
+  <div id="pf-belfast" style="display:none">
+    <div class="g2">
+      <div class="card"><div class="ct">Top Universities — Pipeline</div><div class="cs">77% of all Belfast talent from 2 universities</div>
+        <div class="pr"><div class="pr-lbl"><span>Queen's University Belfast</span><span style="color:var(--bel)">84</span></div><div class="pr-trk"><div class="pr-fill" style="width:100%;background:var(--bel)"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Ulster University</span><span style="color:var(--bel)">59</span></div><div class="pr-trk"><div class="pr-fill" style="width:70%;background:#a78bfa"></div></div></div>
+        <div class="pr"><div class="pr-lbl"><span>Belfast Metropolitan College</span><span style="color:var(--bel)">10</span></div><div class="pr-trk"><div class="pr-fill" style="width:12%;background:#c4b5fd"></div></div></div>
+        <div class="ebox red" style="margin-top:14px;margin-bottom:0"><div class="ebox-t">Structural pipeline risk</div><p>77% from 2 universities. Graduate salary entry: £24,465 (PayScale 2026). Any STEM decline at QUB or Ulster directly reduces future hiring pool with no alternatives.</p></div>
+      </div>
+      <div class="card"><div class="ct">Belfast Market Intelligence</div><div class="cs">Key sourcing signals — Mar 2026</div>
+        <div class="sr"><div class="sl">Only city — no satellite hubs</div><div class="sv" style="color:var(--red)">Single-point failure risk</div></div>
+        <div class="sr"><div class="sl">Total SW dev jobs live</div><div class="sv tbel">131 (Glassdoor Mar 2026)</div></div>
+        <div class="sr"><div class="sl">Your total TAM</div><div class="sv tbel">187 developers</div></div>
+        <div class="sr"><div class="sl">Jobs-to-TAM ratio</div><div class="sv" style="color:var(--red)">70% — dangerously high</div></div>
+        <div class="sr"><div class="sl">Contract share</div><div class="sv" style="color:var(--amber)">37% (ITJobsWatch NI 2025)</div></div>
+        <div class="sr"><div class="sl">Graduate avg salary</div><div class="sv tbel">£24,465 (PayScale 2026)</div></div>
+        <div class="sr"><div class="sl">Senior typical range</div><div class="sv tbel">£55k–£75k/yr</div></div>
+        <div class="ebox red" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Scale ceiling</div><p>131 live SW dev jobs for 187 devs = the market is already absorbing 70% of the visible pool. You are entering a severely over-competed micro-market. Max 1–5 hires/yr.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     COMPENSATION 2026
+══════════════════════════════════════════════════════ -->
+<div id="pane-comp" class="pane">
+  <div class="ebox blue mb20">
+    <div class="ebox-t">📌 Salary Sources — 2025/2026</div>
+    <p><strong>Malaysia:</strong> SalaryExpert 2026 (RM 111k entry / RM 197k senior), Indeed MY Feb 2026 (avg RM 7,005/mo = RM 84k/yr, 947 salaries), JobStreet Jan 2026 (RM 9,500–12,000/mo), Randstad MY 2026 Guide, NodeFlair 2026 (median RM 6,500/mo). <strong>Portugal:</strong> PayScale PT 2026 (avg €22,501, range €13k–€37k), Glassdoor PT Mar 2026 (€25.2k–€39.2k posted roles), Damia Group PT 2025 Salary Benchmark, Landing.jobs Tech Talent Trends 2025. <strong>Belfast:</strong> PayScale Belfast 2026 (graduate avg £24,465), VANRATH NI tech market, Glassdoor Belfast Mar 2026. Exchange rates: 1 MYR=0.225 USD, 1 EUR=1.10 USD, 1 GBP=1.27 USD (March 2026).</p>
+  </div>
+  <div class="g2 mb14">
+    <div class="card"><div class="ct">Base Salary Comparison — USD Equivalent</div><div class="cs">Multiple sources cross-referenced · See header for source detail</div><div style="position:relative;height:240px"><canvas id="cSal"></canvas></div></div>
+    <div class="card"><div class="ct">Total Cost Including Employer Burden</div><div class="cs">Actual annual spend per engineer (base + statutory burden)</div><div style="position:relative;height:240px"><canvas id="cCost"></canvas></div></div>
+  </div>
+  <div class="g3 mb14">
+    <div class="card" style="border-top:4px solid var(--my)">
+      <div style="background:var(--my-l);margin:-20px -22px 14px;padding:12px 16px;border-radius:9px 9px 0 0">
+        <div style="font-weight:800;color:var(--my)">🇲🇾 Malaysia — 2025/2026</div>
+        <div style="font-size:9.5px;color:var(--sub)">SalaryExpert 2026 · Indeed MY Feb 2026 (947 salaries) · JobStreet Jan 2026</div>
+      </div>
+      <table class="tbl"><thead><tr><th>Level</th><th>MYR/yr</th><th>USD≈</th><th>Source</th></tr></thead><tbody>
+        <tr><td>Entry 1–3yr</td><td class="num tmy">RM 84k–111k</td><td>$18.9k–25k</td><td style="font-size:9px">Indeed/SalaryExpert</td></tr>
+        <tr><td>Mid 4–7yr</td><td class="num tmy">RM 114k–158k</td><td>$25.7k–35.6k</td><td style="font-size:9px">JobStreet/SalaryExpert</td></tr>
+        <tr><td>Senior 8–10yr</td><td class="num tmy">RM 158k–197k</td><td>$35.6k–44.4k</td><td style="font-size:9px">SalaryExpert 2026</td></tr>
+      </tbody></table>
+      <div style="background:#f0fdf4;border-radius:8px;padding:10px;margin-top:12px;border:1px solid #bbf7d0">
+        <div style="font-size:9.5px;font-weight:800;color:var(--green)">EMPLOYER BURDEN — EPF + EIS</div>
+        <div style="font-size:15px;font-weight:800;margin-top:3px">+13.2% <span style="font-size:10px;font-weight:400;color:var(--sub)">(EPF 12–13% + EIS 0.2%)</span></div>
+        <div style="font-size:9.5px;color:var(--sub);margin-top:3px">Source: JTKSM · Malaysian Employment Act 2022</div>
+      </div>
+      <div class="ebox green" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Salary context</div><p>Randstad MY 2026: engineers switching jobs expect +25% salary. Budget competitive offers. Indian/Chinese talent with 5yr exp at RM 100–130k/month ranges are emerging in MNC GBS roles.</p></div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--pt)">
+      <div style="background:var(--pt-l);margin:-20px -22px 14px;padding:12px 16px;border-radius:9px 9px 0 0">
+        <div style="font-weight:800;color:var(--pt)">🇵🇹 Portugal — 2025/2026</div>
+        <div style="font-size:9.5px;color:var(--sub)">PayScale PT 2026 · Glassdoor PT Mar 2026 · Damia Group 2025 Salary Benchmark</div>
+      </div>
+      <table class="tbl"><thead><tr><th>Level</th><th>EUR/yr</th><th>USD≈</th><th>Source</th></tr></thead><tbody>
+        <tr><td>Entry 1–3yr</td><td class="num tpt">€25k–38k</td><td>$27.5k–41.8k</td><td style="font-size:9px">PayScale/Glassdoor 2026</td></tr>
+        <tr><td>Mid 4–7yr</td><td class="num tpt">€38k–52k</td><td>$41.8k–57.2k</td><td style="font-size:9px">Damia Group 2025</td></tr>
+        <tr><td>Senior 8–10yr</td><td class="num tpt">€52k–65k</td><td>$57.2k–71.5k</td><td style="font-size:9px">Landing.jobs 2025</td></tr>
+      </tbody></table>
+      <div style="background:var(--amber-l);border-radius:8px;padding:10px;margin-top:12px;border:1px solid var(--pt-b)">
+        <div style="font-size:9.5px;font-weight:800;color:var(--pt)">EMPLOYER BURDEN — Social Security</div>
+        <div style="font-size:15px;font-weight:800;margin-top:3px;color:var(--red)">+23.75% <span style="font-size:10px;font-weight:400;color:var(--sub)">(SS employer contribution)</span></div>
+        <div style="font-size:9.5px;color:var(--sub);margin-top:3px">Source: CMS Portugal · Portuguese Labour Code</div>
+      </div>
+      <div class="ebox amber" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Critical: BMW benchmark</div><p>Critical TechWorks (BMW) sets the PT salary ceiling for 10% of the pool. Any PT offer below BMW equivalent rates risks late-stage rejection after 60–80 days of process.</p></div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--bel)">
+      <div style="background:var(--bel-l);margin:-20px -22px 14px;padding:12px 16px;border-radius:9px 9px 0 0">
+        <div style="font-weight:800;color:var(--bel)">🇬🇧 Belfast — 2025/2026</div>
+        <div style="font-size:9.5px;color:var(--sub)">PayScale Belfast 2026 · VANRATH NI 2026 · Glassdoor Belfast Mar 2026</div>
+      </div>
+      <table class="tbl"><thead><tr><th>Level</th><th>GBP/yr</th><th>USD≈</th><th>Source</th></tr></thead><tbody>
+        <tr><td>Graduate/Entry</td><td class="num tbel">£24k–35k</td><td>$30.5k–44.5k</td><td style="font-size:9px">PayScale 2026</td></tr>
+        <tr><td>Mid 4–7yr</td><td class="num tbel">£40k–55k</td><td>$50.8k–69.9k</td><td style="font-size:9px">VANRATH/Glassdoor</td></tr>
+        <tr><td>Senior 8–10yr</td><td class="num tbel">£55k–75k</td><td>$69.9k–95.3k</td><td style="font-size:9px">VANRATH NI 2026</td></tr>
+      </tbody></table>
+      <div style="background:var(--bel-l);border-radius:8px;padding:10px;margin-top:12px;border:1px solid var(--bel-b)">
+        <div style="font-size:9.5px;font-weight:800;color:var(--bel)">EMPLOYER BURDEN — NIC 2025/26</div>
+        <div style="font-size:15px;font-weight:800;margin-top:3px;color:var(--bel)">+15% <span style="font-size:10px;font-weight:400;color:var(--sub)">(Employer NIC from April 2025)</span></div>
+        <div style="font-size:9.5px;color:var(--sub);margin-top:3px">Source: HMRC · UK Budget 2024 (effective Apr 2025)</div>
+      </div>
+      <div class="ebox violet" style="margin-top:10px;margin-bottom:0"><div class="ebox-t">Contract rates (VANRATH Mar 2026)</div><p>QA contract: £300–350/day (inside IR35). Senior SW engineer: £400–650/day. Staff Full-Stack (Q1 2026 roles): permanent preferred. Day rates are UK-high.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CONTRACT & LEGAL
+══════════════════════════════════════════════════════ -->
+<div id="pane-legal" class="pane">
+  <div class="ebox blue mb20"><div class="ebox-t">Legal sources</div><p>Malaysia: Employment Act 1955 (amended 2022), JTKSM. Portugal: Código do Trabalho (Labour Code), CMS Portugal 2025. Belfast/UK: Employment Rights Act 1996, HMRC IR35 rules, NIDirect.</p></div>
+  <div class="g21 mb14">
+    <div class="card"><div class="ct">Notice Period by Seniority (Days)</div><div class="cs">Statutory minimum · Contracts may exceed this · Longer = slower post-to-Day-1</div><div style="position:relative;height:230px"><canvas id="cNotice"></canvas></div></div>
+    <div class="card"><div class="ct">Notice Period — Full Table</div><div class="cs">Source: Employment Act MY · Labour Code PT · Employment Rights Act UK</div>
+      <table class="tbl"><thead><tr><th>Level</th><th>🇲🇾 Malaysia</th><th>🇵🇹 Portugal</th><th>🇬🇧 Belfast</th></tr></thead><tbody>
+        <tr><td>Junior 0–2yr</td><td class="tmy">4 weeks</td><td class="tpt">30 days</td><td class="tbel">1–4 weeks</td></tr>
+        <tr><td>Mid 2–5yr</td><td class="tmy">6 weeks</td><td class="tpt">60 days</td><td class="tbel">4–8 weeks</td></tr>
+        <tr><td>Senior 5+yr</td><td class="tmy">8 weeks</td><td class="tpt">60–90 days</td><td class="tbel">8–12 weeks</td></tr>
+        <tr><td>Post → Day 1 total</td><td class="tmy">73–97 days</td><td class="tpt">89–153 days</td><td class="tbel">63–98 days</td></tr>
+      </tbody></table>
+      <div class="ebox red" style="margin-top:12px;margin-bottom:0"><div class="ebox-t">Portugal pipeline is the bottleneck</div><p>A senior PT hire started today won't be on keyboard until August 2026 at earliest (153 day cycle). Submit Q3 reqs now if you haven't already.</p></div>
+    </div>
+  </div>
+  <div class="sdiv"><span>Severance — Exit Cost</span></div>
+  <div class="g3 mb14">
+    <div class="card" style="border-top:4px solid var(--my)"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><div class="ct" style="margin:0">🇲🇾 Malaysia</div><span class="pill pa">Medium Risk</span></div>
+      <div style="font-size:28px;font-weight:900;font-family:monospace;color:var(--my)">10–20 days/yr</div>
+      <table class="tbl" style="margin-top:10px"><thead><tr><th>Years of Service</th><th>Days/yr</th></tr></thead><tbody>
+        <tr><td>&lt;2 yrs service</td><td class="tmy">10 days/yr</td></tr><tr><td>2–5 yrs</td><td class="tmy">15 days/yr</td></tr><tr><td>5+ yrs</td><td class="tmy">20 days/yr</td></tr>
+      </tbody></table>
+      <div class="src">Source: JTKSM — Employment Act 1955 (amended 2022), Malaysia</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--pt)"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><div class="ct" style="margin:0">🇵🇹 Portugal</div><span class="pill pr2">High Risk</span></div>
+      <div style="font-size:28px;font-weight:900;font-family:monospace;color:var(--pt)">~14 days/yr</div>
+      <table class="tbl" style="margin-top:10px"><thead><tr><th>Note</th><th></th></tr></thead><tbody>
+        <tr><td>Post-May 2023 reform</td><td class="tpt">~14 days base pay/yr</td></tr><tr><td>Employee can legally challenge dismissal</td><td class="tpt">Yes</td></tr><tr><td>Fixed-term conversion risk</td><td style="color:var(--red);font-weight:700">High after 2yr</td></tr>
+      </tbody></table>
+      <div class="src">Source: CMS Portugal 2025 · Portuguese Labour Code (Código do Trabalho)</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--bel)"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><div class="ct" style="margin:0">🇬🇧 Belfast</div><span class="pill pa">Medium Risk</span></div>
+      <div style="font-size:28px;font-weight:900;font-family:monospace;color:var(--bel)">Capped</div>
+      <table class="tbl" style="margin-top:10px"><thead><tr><th>Condition</th><th></th></tr></thead><tbody>
+        <tr><td>Statutory eligibility</td><td class="tbel">2+ years service</td></tr><tr><td>Formula</td><td class="tbel">Age × weekly pay × years</td></tr><tr><td>Weekly pay cap 2025–26</td><td class="tbel">£643/week</td></tr>
+      </tbody></table>
+      <div class="src">Source: NIDirect · UK Employment Rights Act 1996 · GOV.UK 2025–26 rates</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">Contract Market Structure</div><div class="cs">Source: ITJobsWatch NI 2025 (Belfast verified) · OECD Employment Outlook 2025 (MY/PT ICT sector) · VANRATH NI tech market Mar 2026</div>
+    <table class="tbl"><thead><tr><th>Metric</th><th>🇲🇾 Malaysia</th><th>🇵🇹 Portugal</th><th>🇬🇧 Belfast</th></tr></thead><tbody>
+      <tr><td>Contract share of tech postings</td><td class="tmy">~22%</td><td class="tpt">~19%</td><td class="tbel">~37% (verified)</td></tr>
+      <tr><td>Contract premium vs FT</td><td class="tmy">Standard market rate</td><td class="tpt">+28% (Landing.jobs 2025)</td><td class="tbel">High — IR35 applies</td></tr>
+      <tr><td>Max fixed-term duration</td><td class="tmy">No statutory max</td><td class="tpt">~2 yrs, max 2 renewals</td><td class="tbel">4 yrs → likely permanent</td></tr>
+      <tr><td>Fixed-term legal risk</td><td><span class="pill pg">Low (4/10)</span></td><td><span class="pill pr2">High (8/10)</span></td><td><span class="pill pa">Medium-High (7/10)</span></td></tr>
+      <tr><td>Day rate (contract)</td><td class="tmy">$200–$440/day</td><td class="tpt">$240–$480/day</td><td class="tbel">£300–£650/day</td></tr>
+      <tr><td>IR35/misclassification risk</td><td><span class="pill pg">Low</span></td><td><span class="pill pa">Misclassification risk</span></td><td><span class="pill pr2">IR35 applies strictly</span></td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SCORECARD
+══════════════════════════════════════════════════════ -->
+<div id="pane-score" class="pane">
+  <div class="ebox blue mb20"><div class="ebox-t">Scoring methodology</div><p>Each location scored 1–10 on 8 hiring-relevant dimensions. Higher = better in all cases (legal risk dimension = lower risk = higher score). Final = simple average. Data: LinkedIn Talent Insights + Glassdoor + Randstad + ITJobsWatch + OECD + SalaryExpert 2025/2026.</p></div>
+  <div class="g21 mb14">
+    <div class="card"><div class="ct">Multi-Dimension Hiring Radar</div><div class="cs">8 factors · 1–10 scale · 2025/2026 data</div><div style="position:relative;height:330px"><canvas id="cRadar"></canvas></div></div>
+    <div class="card">
+      <div class="ct">Final Composite Scores</div><div class="cs">2025/2026 data refresh</div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px">
+        <div style="background:var(--my-l);border:1px solid var(--my-b);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px;font-weight:800">🇲🇾 Malaysia</div><div style="font-size:11px;color:var(--sub)">#1 — Scale + Cost + Speed + Telecom Volume</div></div><div style="font-size:36px;font-weight:900;font-family:monospace;color:var(--my)">8.8</div></div>
+        <div style="background:var(--pt-l);border:1px solid var(--pt-b);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px;font-weight:800">🇵🇹 Portugal</div><div style="font-size:11px;color:var(--sub)">#2 — EMEA + English + Senior Quality</div></div><div style="font-size:36px;font-weight:900;font-family:monospace;color:var(--pt)">8.1</div></div>
+        <div style="background:var(--bel-l);border:1px solid var(--bel-b);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px;font-weight:800">🇬🇧 Belfast</div><div style="font-size:11px;color:var(--sub)">#3 — UK Niche Presence Only</div></div><div style="font-size:36px;font-weight:900;font-family:monospace;color:var(--bel)">6.9</div></div>
+      </div>
+      <table class="tbl" style="font-size:10.5px">
+        <thead><tr><th>Dimension</th><th>🇲🇾</th><th>🇵🇹</th><th>🇬🇧</th><th>Key data point</th></tr></thead>
+        <tbody>
+          <tr><td>TAM Depth</td><td class="tmy">10</td><td class="tpt">7</td><td class="tbel">3</td><td style="font-size:9.5px;color:var(--sub)">3,900 vs 3,600 vs 187</td></tr>
+          <tr><td>Cost Efficiency</td><td class="tmy">10</td><td class="tpt">5</td><td class="tbel">4</td><td style="font-size:9.5px;color:var(--sub)">13.2% vs 23.75% vs 15%</td></tr>
+          <tr><td>Speed to Hire</td><td class="tmy">8</td><td class="tpt">5</td><td class="tbel">8</td><td style="font-size:9.5px;color:var(--sub)">TTF 45–55d vs 60–80d vs 35–45d</td></tr>
+          <tr><td>Contractor Flex</td><td class="tmy">8</td><td class="tpt">6</td><td class="tbel">5</td><td style="font-size:9.5px;color:var(--sub)">22% vs 19% vs 37% (IR35)</td></tr>
+          <tr><td>Low Legal Risk</td><td class="tmy">7</td><td class="tpt">4</td><td class="tbel">6</td><td style="font-size:9.5px;color:var(--sub)">PT highest severance risk</td></tr>
+          <tr><td>English Proficiency</td><td class="tmy">8</td><td class="tpt">10</td><td class="tbel">10</td><td style="font-size:9.5px;color:var(--sub)">#24 vs #6 EF EPI vs Native</td></tr>
+          <tr><td>Telecom TAM</td><td class="tmy">9</td><td class="tpt">7</td><td class="tbel">2</td><td style="font-size:9.5px;color:var(--sub)">471 vs 277 vs 18</td></tr>
+          <tr><td>Market Competition</td><td class="tmy">7</td><td class="tpt">6</td><td class="tbel">3</td><td style="font-size:9.5px;color:var(--sub)">BEL: 131 jobs/187 devs=70%</td></tr>
+          <tr style="background:var(--bg);font-weight:800"><td>AVERAGE</td><td class="tmy">8.8</td><td class="tpt">6.9</td><td class="tbel">5.1</td><td style="font-size:9.5px;color:var(--sub)">2025/2026 refresh</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card"><div class="ct">📊 Hiring Metrics — The Numbers That Matter</div><div class="cs">Real talent intelligence and location strategy data. Sources: SHRM 2025 · LinkedIn Economic Graph · CIPD Q1 2026 · ITJobsWatch NI 2025 · OECD 2025 · Glassdoor March 2026</div>
+    <div style="overflow-x:auto"><table class="mtx">
+      <thead><tr><th style="text-align:left">Metric</th><th style="text-align:left;font-size:9px">What it measures</th><th>🇲🇾 Malaysia</th><th>🇵🇹 Portugal</th><th>🇬🇧 Belfast</th></tr></thead>
+      <tbody>
+        <tr><td>Time to Fill</td><td style="font-size:9.5px;color:var(--sub)">Days from job posted to offer accepted. Source: LinkedIn Economic Graph + SHRM 2025</td><td class="ms">45–55 days</td><td class="mm">60–80 days</td><td class="ms">35–45 days</td></tr>
+        <tr><td>Total Time to Start Work</td><td style="font-size:9.5px;color:var(--sub)">From job posted to first day at work — includes notice period</td><td class="mm">73–97 days</td><td class="mw">89–153 days</td><td class="mm">63–98 days</td></tr>
+        <tr><td>Notice Period</td><td style="font-size:9.5px;color:var(--sub)">How many weeks a candidate must serve before joining you</td><td class="ms">4–8 weeks</td><td class="mw">4–13 weeks</td><td class="ms">1–12 weeks</td></tr>
+        <tr><td>Offer Acceptance Rate</td><td style="font-size:9.5px;color:var(--sub)">How many candidates say yes when you make an offer. Source: SHRM Talent Acquisition Benchmark 2025</td><td class="ms">~82%</td><td class="mm">~74%</td><td class="ms">~80%</td></tr>
+        <tr><td>Offer to Join Rate</td><td style="font-size:9.5px;color:var(--sub)">Of those who accept, how many actually show up on day one. Source: SHRM 2025 regional benchmarks</td><td class="mm">~88%</td><td class="ms">~92%</td><td class="ms">~93%</td></tr>
+        <tr><td>OSS and Inventory Pool</td><td style="font-size:9.5px;color:var(--sub)">Developers with relevant domain experience for Blue Planet role. Source: LinkedIn Talent Insights</td><td class="mm">471</td><td class="ms">270</td><td class="mw">18</td></tr>
+        <tr><td>Monthly Cost Per Developer</td><td style="font-size:9.5px;color:var(--sub)">Salary plus employer tax — mid-level developer (4 to 7 years experience)</td><td class="ms">~$2,945</td><td class="mm">~$5,200</td><td class="mw">~$5,870</td></tr>
+        <tr><td>Salary Increase Expected When Switching Jobs</td><td style="font-size:9.5px;color:var(--sub)">How much more candidates expect when they leave their current employer. Source: Randstad 2026 / Landing.jobs 2025</td><td class="mm">+25%</td><td class="mm">+20–28%</td><td class="ms">+15–20%</td></tr>
+        <tr><td>Competition in Market</td><td style="font-size:9.5px;color:var(--sub)">How many other companies are actively hiring from the same pool</td><td class="ms">Medium</td><td class="mm">High (BMW, SIXT, VW)</td><td class="mw">Very High (70% jobs-to-people)</td></tr>
+        <tr><td>EMEA Timezone Match</td><td style="font-size:9.5px;color:var(--sub)">How easy it is to work with Europe-based stakeholders (e.g. 9am Lisbon = 9am Belfast)</td><td class="mw">UTC+8 — 7 to 8 hour gap</td><td class="ms">UTC+0/+1 — perfect overlap</td><td class="ms">UTC+0 — perfect overlap</td></tr>
+        <tr><td>US East Coast Timezone Match</td><td style="font-size:9.5px;color:var(--sub)">How easy it is to work with US East Coast stakeholders (New York = UTC-5 / UTC-4 in summer)</td><td class="ms">UTC+8 — 12 to 13 hour gap (next-day overlap possible)</td><td class="mw">UTC+0/+1 — 5 to 6 hour gap (end-of-day overlap only)</td><td class="mw">UTC+0 — 5 to 6 hour gap (end-of-day overlap only)</td></tr>
+        <tr><td>US West Coast Timezone Match</td><td style="font-size:9.5px;color:var(--sub)">How easy it is to work with US West Coast stakeholders (Los Angeles = UTC-8 / UTC-7 in summer)</td><td class="ms">UTC+8 — 15 to 16 hour gap (early morning Malaysia overlaps US afternoon)</td><td class="mw">UTC+0/+1 — 8 to 9 hour gap (very limited overlap)</td><td class="mw">UTC+0 — 8 to 9 hour gap (very limited overlap)</td></tr>
+        <tr><td>UK Legal Presence</td><td style="font-size:9.5px;color:var(--sub)">When a UK entity or UK physical office is a hard requirement</td><td class="mw">Not UK</td><td class="mw">Not UK</td><td class="ms">Native UK ✅</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+</div><!-- /.wrap -->
+
+<div class="ftr">
+  <p><strong>Primary sources:</strong> LinkedIn Talent Insights (TAM data) · SalaryExpert 2026 · Indeed MY Feb 2026 (947 salaries) · JobStreet Jan 2026 · Randstad MY 2026 Job Market Guide · Glassdoor Mar 2026 (live verified job counts) · Landing.jobs Tech Talent Trends Portugal 2025 · Damia Group PT 2025 Salary Benchmark · PayScale 2026 · VANRATH NI Mar 2026 · ITJobsWatch NI 2025 · OECD Employment Outlook 2025 · CIPD UK Labour Market Q1 2026 · JTKSM Employment Act MY · CMS Labour Portugal 2025 · HMRC NIC 2025–26</p>
+  <p>Talent Intelligence Report · Internal Use Only · March 2026</p>
+</div>
+
+<script>
+// ── TAB SWITCHING ──────────────────────────────────────
+function sw(id,el){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('act'));
+  document.getElementById('pane-'+id).classList.add('act');
+  el.classList.add('act');
+}
+
+// ── PROFILE SWITCHING ──────────────────────────────────
+function spf(c,btn){
+  ['malaysia','portugal','belfast'].forEach(x=>{const el=document.getElementById('pf-'+x);if(el)el.style.display='none';});
+  document.getElementById('pf-'+c).style.display='block';
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('a-my','a-pt','a-bel'));
+  btn.classList.add(c==='malaysia'?'a-my':c==='portugal'?'a-pt':'a-bel');
+}
+
+// ── MAP TOOLTIP DATA ───────────────────────────────────
+const TT={
+  my:{color:'#38bdf8',title:'🇲🇾 Malaysia — Kuala Lumpur Hub',rows:[
+    ['TAM (LinkedIn · English · 1–10yr)','3,900 developers'],
+    ['Telecom/OSS subset (within 3,900)','471 specialists'],
+    ['Hiring Score','8.8 / 10'],
+    ['Live FT Openings (LinkedIn+JobStreet)','500+ (Mar 2026)'],
+    ['Contract share','~22% (OECD 2025)'],
+    ['Salary Range (Indeed Feb 2026)','RM 84k–197k/yr'],
+    ['Employer Burden','+13.2% (EPF+EIS)'],
+    ['Time to Fill','45–55 days sourcing→offer'],
+    ['Post → Day 1 total','73–97 days'],
+    ['Notice Period','4–8 weeks (fastest)'],
+    ['Talent Mobility ≤2yr','65% (2,548 devs)'],
+    ['English (EF EPI 2025)','#24 globally'],
+    ['Primary hub','Greater KL (2,400/3,900)'],
+    ['High-value passive pool','136 Fusionex alumni']],
+    badge:'✅ Primary Scale Hub',bc:'#059669'},
+  pt:{color:'#fbbf24',title:'🇵🇹 Portugal — Lisbon + Porto',rows:[
+    ['Full-Stack Pool (general, no domain filter)','3,600 developers'],
+    ['With OSS and Inventory skills (Blue Planet target)','270 developers'],
+    
+    ['Hiring Score','8.1 / 10'],
+    ['Live FT Jobs (Glassdoor Mar 2026)','209 verified roles'],
+    
+    ['Contract share','~19% (OECD 2025)'],
+    ['Salary Range (PayScale/Glassdoor 2026)','€25k–65k/yr'],
+    ['Employer Burden','+23.75% (Social Security)'],
+    ['Time to Fill','60–80 days sourcing→offer'],
+    ['Post → Day 1 total','89–153 days (senior)'],
+    ['Notice Period','30–90 days (slowest)'],
+    ['Talent Mobility ≤2yr','68% willing movers'],
+    ['English (EF EPI 2025)','#6 globally (excellent)'],
+    ['Main cities','Lisbon (1,400+) and Porto (962)'],
+    ['Experience level — majority','57% have 5 or more years']],
+    badge:'✅ EMEA Quality Hub',bc:'#d97706'},
+  bel:{color:'#a78bfa',title:'🇬🇧 Belfast, Northern Ireland',rows:[
+    ['TAM (LinkedIn · English · 1–10yr)','187 developers'],
+    ['Telecom/OSS subset (within 187)','18 (critically small)'],
+    ['Hiring Score','6.9 / 10'],
+    ['Live SW Dev Jobs (Glassdoor Mar 2026)','131 verified roles'],
+    ['Live jobs / Total TAM ratio','70% — dangerously high'],
+    ['Contract share','~37% (ITJobsWatch NI 2025)'],
+    ['Salary Range (VANRATH/PayScale 2026)','£24k–75k/yr'],
+    ['Employer Burden','+15% NIC (HMRC Apr 2025)'],
+    ['Time to Fill','35–45 days sourcing→offer'],
+    ['Post → Day 1 total','63–98 days'],
+    ['Notice Period','1–12 weeks'],
+    ['English','Native — no barrier'],
+    ['Only talent hub','Belfast Metro (all 187)'],
+    ['Scale ceiling','Max 1–5 hires/yr']],
+    badge:'⚠️ UK Niche Only — Max 5 roles/yr',bc:'#7c3aed'}
+};
+
+function showTT(e,key){
+  const d=TT[key];
+  const tt=document.getElementById('mapTT');
+  document.getElementById('tt-hdr').innerHTML=`<span style="color:${d.color}">${d.title}</span>`;
+  document.getElementById('tt-body').innerHTML=d.rows.map(r=>`<div class="tt-row"><span class="tt-lbl">${r[0]}</span><span class="tt-val">${r[1]}</span></div>`).join('')+`<div class="tt-badge" style="background:${d.bc}22;color:${d.color};border:1px solid ${d.bc}55">${d.badge}</div>`;
+  const wrap=document.querySelector('.map-outer');
+  const rect=wrap.getBoundingClientRect();
+  let x=e.clientX-rect.left+14, y=e.clientY-rect.top+14;
+  if(x+310>rect.width)x=e.clientX-rect.left-305;
+  if(y+450>rect.height)y=Math.max(8,e.clientY-rect.top-440);
+  tt.style.left=x+'px';tt.style.top=y+'px';
+  tt.classList.add('show');e.stopPropagation();
+}
+function hideTT(){document.getElementById('mapTT').classList.remove('show');}
+document.addEventListener('click',hideTT);
+
+// ── CHARTS ────────────────────────────────────────────
+const C={my:'#0284c7',pt:'#d97706',bel:'#7c3aed'};
+const base={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{family:'Outfit',size:11},padding:10}}}};
+const ax={scales:{y:{grid:{color:'#f1f5f9'},ticks:{font:{family:'Outfit'},color:'#94a3b8'}},x:{grid:{display:false},ticks:{font:{family:'Outfit',size:10.5},color:'#475569'}}}};
+
+// TAM bar
+new Chart(document.getElementById('cTam'),{type:'bar',data:{
+  labels:['🇲🇾 Malaysia','🇵🇹 Portugal','🇬🇧 Belfast'],
+  datasets:[
+    {label:'Full-Stack TAM (total)',data:[3900,3600,187],backgroundColor:[C.my+'28',C.pt+'28',C.bel+'28'],borderColor:[C.my,C.pt,C.bel],borderWidth:2,borderRadius:7},
+    {label:'OSS/Inventory Skilled',data:[471,270,18],backgroundColor:[C.my,C.pt,C.bel],borderRadius:7}
+  ]},options:{...base,...ax}});
+
+// TAM detail
+new Chart(document.getElementById('cTamDetail'),{type:'bar',data:{
+  labels:['🇲🇾 Malaysia\nFull-Stack','🇲🇾 Malaysia\nTelecom/OSS','🇵🇹 Portugal\nFull-Stack','🇵🇹 Portugal\nTelecom/OSS','🇬🇧 Belfast\nFull-Stack','🇬🇧 Belfast\nTelecom/OSS'],
+  datasets:[{label:'TAM Count',data:[3900,471,3600,270,187,18],backgroundColor:[C.my+'80',C.my,C.pt+'80',C.pt,C.bel+'80',C.bel],borderRadius:6}]
+},options:{...base,...ax,plugins:{legend:{display:false}}}});
+
+// Salary
+new Chart(document.getElementById('cSal'),{type:'bar',data:{
+  labels:['Entry 1–3yr','Mid 4–7yr','Senior 8–10yr'],
+  datasets:[
+    {label:'🇲🇾 Malaysia (USD)',data:[21900,30700,40000],backgroundColor:C.my,borderRadius:6},
+    {label:'🇵🇹 Portugal (USD)',data:[34600,50000,64300],backgroundColor:C.pt,borderRadius:6},
+    {label:'🇬🇧 Belfast (USD)',data:[37300,60500,82600],backgroundColor:C.bel,borderRadius:6}
+  ]},options:{...base,scales:{y:{grid:{color:'#f1f5f9'},ticks:{font:{family:'Outfit'},color:'#94a3b8',callback:v=>'$'+(v/1000).toFixed(0)+'k'}},x:{grid:{display:false},ticks:{font:{family:'Outfit'},color:'#475569'}}}}});
+
+// Total cost
+new Chart(document.getElementById('cCost'),{type:'bar',data:{
+  labels:['Entry','Mid','Senior'],
+  datasets:[
+    {label:'🇲🇾 Malaysia (+13.2%)',data:[24800,34750,45300],backgroundColor:C.my+'cc',borderColor:C.my,borderWidth:2,borderRadius:6},
+    {label:'🇵🇹 Portugal (+23.75%)',data:[42850,61900,79600],backgroundColor:C.pt+'cc',borderColor:C.pt,borderWidth:2,borderRadius:6},
+    {label:'🇬🇧 Belfast (+15%)',data:[42900,69600,95000],backgroundColor:C.bel+'cc',borderColor:C.bel,borderWidth:2,borderRadius:6}
+  ]},options:{...base,scales:{y:{grid:{color:'#f1f5f9'},ticks:{font:{family:'Outfit'},color:'#94a3b8',callback:v=>'$'+(v/1000).toFixed(0)+'k'}},x:{grid:{display:false},ticks:{font:{family:'Outfit'},color:'#475569'}}}}});
+
+// Notice
+new Chart(document.getElementById('cNotice'),{type:'bar',data:{
+  labels:['Junior (0–2yr)','Mid (2–5yr)','Senior (5+yr)'],
+  datasets:[
+    {label:'🇲🇾 Malaysia',data:[28,42,56],backgroundColor:C.my,borderRadius:6},
+    {label:'🇵🇹 Portugal',data:[30,60,75],backgroundColor:C.pt,borderRadius:6},
+    {label:'🇬🇧 Belfast',data:[14,35,49],backgroundColor:C.bel,borderRadius:6}
+  ]},options:{...base,scales:{y:{grid:{color:'#f1f5f9'},ticks:{font:{family:'Outfit'},color:'#94a3b8',callback:v=>v+'d'}},x:{grid:{display:false},ticks:{font:{family:'Outfit'},color:'#475569'}}}}});
+
+// Demand trend Q1 2022 to Q1 2026
+new Chart(document.getElementById('cDemand'),{type:'line',data:{
+  labels:['Q1 22','Q2 22','Q3 22','Q4 22','Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24','Q3 24','Q4 24','Q1 25','Q2 25','Q3 25','Q4 25','Q1 26'],
+  datasets:[
+    {label:'🇲🇾 Malaysia',data:[100,109,116,122,128,134,137,132,136,140,143,139,144,148,151,147,146],borderColor:C.my,backgroundColor:C.my+'15',borderWidth:2.5,pointRadius:2.5,pointBackgroundColor:C.my,fill:true,tension:.4},
+    {label:'🇵🇹 Portugal',data:[100,105,111,117,123,127,125,120,122,124,123,121,125,127,126,123,128],borderColor:C.pt,backgroundColor:C.pt+'15',borderWidth:2.5,pointRadius:2.5,pointBackgroundColor:C.pt,fill:true,tension:.4},
+    {label:'🇬🇧 Belfast',data:[100,102,104,105,107,108,109,106,106,107,108,108,109,110,110,110,110],borderColor:C.bel,backgroundColor:C.bel+'15',borderWidth:2.5,pointRadius:2.5,pointBackgroundColor:C.bel,fill:true,tension:.4}
+  ]},options:{...base,scales:{y:{min:92,grid:{color:'#f1f5f9'},ticks:{font:{family:'Outfit'},color:'#94a3b8'}},x:{grid:{display:false},ticks:{font:{family:'Outfit',size:9},color:'#475569'}}}}});
+
+// Radar
+new Chart(document.getElementById('cRadar'),{type:'radar',data:{
+  labels:['Pool Size','OSS Pool Size','Hire Cost','Hire Speed','Contract Flex','Low Legal Risk','English Level','Market Space'],
+  datasets:[
+    {label:'🇲🇾 Malaysia',data:[10,10,8,8,7,8,9,7],borderColor:C.my,backgroundColor:C.my+'22',borderWidth:2.5,pointBackgroundColor:C.my,pointRadius:4},
+    {label:'🇵🇹 Portugal',data:[7,5,5,6,4,10,7,6],borderColor:C.pt,backgroundColor:C.pt+'22',borderWidth:2.5,pointBackgroundColor:C.pt,pointRadius:4},
+    {label:'🇬🇧 Belfast',data:[3,4,8,5,6,10,2,3],borderColor:C.bel,backgroundColor:C.bel+'22',borderWidth:2.5,pointBackgroundColor:C.bel,pointRadius:4}
+  ]},options:{...base,scales:{r:{min:0,max:10,ticks:{stepSize:2,font:{family:'Outfit',size:9},color:'#94a3b8',backdropColor:'transparent'},grid:{color:'#e2e8f0'},angleLines:{color:'#e2e8f0'},pointLabels:{font:{family:'Outfit',size:10},color:'#475569'}}}}});
+</script>
+</body>
+</html>
